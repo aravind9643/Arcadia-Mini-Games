@@ -1,6 +1,6 @@
 # Arcadia — Mini Games
 
-A mobile-first PWA arcade of twenty-six mini games, built with React 19, TypeScript, Vite and Framer Motion. Installable, and fully playable offline.
+A mobile-first PWA arcade of twenty-seven mini games, built with React 19, TypeScript, Vite and Framer Motion. Installable, and fully playable offline.
 
 ## Run it
 
@@ -43,6 +43,9 @@ The service worker only runs in a production build, so use `preview` to test ins
 | Triple Tile | Puzzle | top score |
 | Road Hop | Arcade | furthest hop |
 | Odd Shade | Reflex | highest level |
+| Arrow Escape | Puzzle | levels cleared |
+
+**Arrow Escape** is a dependency-ordering puzzle: each arrow leaves the board along the straight line it points down, and only moves if that line is completely clear. Because removal only ever frees space, the state space is monotone — so levels are generated *backwards* (each arrow is placed only where its exit lane is already clear), which guarantees solvability by construction, and a greedy solver needs no backtracking. That same solver powers the hint button. A generator test over 1,200 levels confirmed every one is solvable and well formed.
 
 **On naming:** several of these follow mechanics popularised by well-known games (Connections, Suika/Watermelon, Triple Match, Crossy Road). Each is an independent implementation with its own name, artwork and content — no assets, word lists or puzzle data are taken from those titles.
 
