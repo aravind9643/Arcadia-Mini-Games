@@ -1,0 +1,95 @@
+.snake {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  aspect-ratio: 1;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--stroke);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  touch-action: none;
+}
+.snake__canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.snake__veil {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  text-align: center;
+  padding: 20px;
+  background: rgba(6, 8, 14, 0.62);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+:root[data-theme='light'] .snake__veil {
+  background: rgba(244, 244, 251, 0.72);
+}
+.snake__veil strong {
+  font-size: 1.5rem;
+  font-weight: 780;
+  letter-spacing: -0.03em;
+}
+.snake__veil span {
+  font-size: 0.86rem;
+  color: var(--text-dim);
+  max-width: 22ch;
+  line-height: 1.45;
+}
+
+/* ---------- d-pad ---------- */
+.snake__dpad {
+  display: grid;
+  grid-template-areas:
+    '. u .'
+    'l . r'
+    '. d .';
+  gap: 7px;
+  width: 168px;
+}
+.dp {
+  display: grid;
+  place-items: center;
+  width: 51px;
+  height: 51px;
+  border-radius: 16px;
+  background: var(--surface-2);
+  border: 1px solid var(--stroke);
+  color: var(--text-dim);
+  font-size: 0.76rem;
+  transition: all 0.15s var(--ease);
+}
+.dp:active {
+  background: linear-gradient(150deg, rgba(163, 230, 53, 0.32), rgba(16, 185, 129, 0.2));
+  border-color: rgba(163, 230, 53, 0.5);
+  color: var(--lime);
+  transform: scale(0.93);
+}
+.dp--u {
+  grid-area: u;
+}
+.dp--l {
+  grid-area: l;
+}
+.dp--r {
+  grid-area: r;
+}
+.dp--d {
+  grid-area: d;
+}
+
+/* Pointer devices have the arrow keys — reclaim the space. */
+@media (hover: hover) and (pointer: fine) {
+  .snake__dpad {
+    display: none;
+  }
+}

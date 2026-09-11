@@ -1,0 +1,96 @@
+.t48 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  touch-action: none;
+}
+
+.t48__grid {
+  /* --cell drives both the static cells and the absolute tile offsets */
+  --gap: clamp(7px, 2.4vw, 12px);
+  --board: min(100%, 420px);
+  --cell: calc((var(--board) - 5 * var(--gap)) / 4);
+
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, var(--cell));
+  grid-template-rows: repeat(4, var(--cell));
+  gap: var(--gap);
+  padding: var(--gap);
+  width: var(--board);
+  border-radius: var(--r-lg);
+  background: var(--surface);
+  border: 1px solid var(--stroke);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+.t48__cell {
+  border-radius: var(--r-md);
+  background: var(--surface);
+}
+
+.t48__tile {
+  position: absolute;
+  /* offset by the board's own padding */
+  margin: var(--gap);
+  width: var(--cell);
+  height: var(--cell);
+  display: grid;
+  place-items: center;
+  border-radius: var(--r-md);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.03em;
+  will-change: transform, left, top;
+}
+
+.t48__scorewrap {
+  position: relative;
+  min-width: 0;
+}
+.t48__gain {
+  position: absolute;
+  top: 2px;
+  right: 10px;
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: var(--lime);
+  text-shadow: 0 0 16px rgba(163, 230, 53, 0.7);
+  pointer-events: none;
+}
+
+.t48__hint {
+  font-size: 0.79rem;
+  color: var(--text-faint);
+  text-align: center;
+}
+.t48__hint--keys {
+  display: none;
+}
+@media (hover: hover) and (pointer: fine) {
+  .t48__hint--touch {
+    display: none;
+  }
+  .t48__hint--keys {
+    display: inline;
+  }
+}
+
+.t48__banner {
+  position: fixed;
+  top: calc(var(--safe-t) + 76px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 70;
+  padding: 11px 20px;
+  border-radius: var(--r-full);
+  background: linear-gradient(100deg, var(--amber), #f97316);
+  color: #2a1500;
+  font-size: 0.84rem;
+  font-weight: 750;
+  white-space: nowrap;
+  box-shadow: 0 14px 34px -12px rgba(251, 191, 36, 0.85);
+}

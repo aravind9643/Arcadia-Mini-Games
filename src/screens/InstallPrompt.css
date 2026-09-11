@@ -1,0 +1,41 @@
+.install {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 22px;
+  padding: 13px 14px;
+  overflow: hidden;
+  border-radius: var(--r-md);
+  background: linear-gradient(105deg, rgba(139, 92, 246, 0.2), rgba(34, 211, 238, 0.12));
+  border: 1px solid rgba(139, 92, 246, 0.34);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+.install__icon {
+  font-size: 1.4rem;
+  flex: 0 0 auto;
+}
+.install__text {
+  flex: 1;
+  min-width: 0;
+}
+.install__text strong {
+  display: block;
+  font-size: 0.92rem;
+  font-weight: 720;
+  letter-spacing: -0.015em;
+}
+.install__text p {
+  margin-top: 2px;
+  font-size: 0.77rem;
+  line-height: 1.4;
+  color: var(--text-dim);
+}
+.install__x {
+  width: 30px;
+  height: 30px;
+  font-size: 0.72rem;
+  background: transparent;
+  border-color: transparent;
+  color: var(--text-faint);
+}
