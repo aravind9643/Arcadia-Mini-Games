@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { useState } from 'react'
 import { Sheet } from '../components/GameFrame'
+import { Icon } from '../components/Icon'
 import { Button, SectionTitle, Toggle } from '../components/ui'
 import { GAMES } from '../games/registry'
 import { cue, sfx } from '../lib/feedback'
@@ -24,7 +25,7 @@ export function Settings() {
       <SectionTitle>Appearance</SectionTitle>
       <div className="settings__group">
         <Toggle
-          icon={s.theme === 'dark' ? '🌙' : '☀️'}
+          icon={s.theme === 'dark' ? 'moon' : 'sun'}
           label="Dark theme"
           hint={s.theme === 'dark' ? 'Deep space palette' : 'Bright daylight palette'}
           checked={s.theme === 'dark'}
@@ -35,7 +36,7 @@ export function Settings() {
       <SectionTitle>Feedback</SectionTitle>
       <div className="settings__group">
         <Toggle
-          icon="🔊"
+          icon="volume"
           label="Sound effects"
           hint="Synthesised in-app — no downloads"
           checked={s.sound}
@@ -45,7 +46,7 @@ export function Settings() {
           }}
         />
         <Toggle
-          icon="📳"
+          icon="vibrate"
           label="Haptics"
           hint="Vibration on supported devices"
           checked={s.haptics}
@@ -59,7 +60,9 @@ export function Settings() {
       <SectionTitle>Data</SectionTitle>
       <div className="settings__group">
         <div className="settings__row">
-          <span className="toggle__icon">💾</span>
+          <span className="toggle__icon">
+            <Icon name="database" size={19} />
+          </span>
           <span className="toggle__text">
             <span className="toggle__label">Stored on this device</span>
             <span className="toggle__hint">
@@ -73,7 +76,9 @@ export function Settings() {
       </div>
 
       <footer className="settings__foot">
-        <span className="settings__mark">🕹️</span>
+        <span className="settings__mark">
+          <Icon name="gamepad" size={24} />
+        </span>
         <strong>Arcadia</strong>
         <p>
           {GAMES.length} mini games · installable · plays offline

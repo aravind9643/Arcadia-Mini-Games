@@ -1,4 +1,5 @@
 import { lazy, type ComponentType } from 'react'
+import type { IconName } from '../components/Icon'
 
 export type GameCategory = 'Puzzle' | 'Reflex' | 'Memory' | 'Arcade' | 'Word'
 
@@ -7,8 +8,8 @@ export type GameMeta = {
   title: string
   tagline: string
   category: GameCategory
-  /** Emoji used as the card mark. */
-  icon: string
+  /** Icon from the inline SVG set. */
+  icon: IconName
   /** Two colors for the card's gradient. */
   colors: [string, string]
   /** How the best score should be read. */
@@ -25,7 +26,7 @@ export const GAMES: GameMeta[] = [
     title: 'Memory Match',
     tagline: 'Pair the glyphs before your moves run out',
     category: 'Memory',
-    icon: '🧠',
+    icon: 'brain',
     colors: ['#8b5cf6', '#d946ef'],
     scoring: 'low',
     scoreLabel: 'Fewest moves',
@@ -41,7 +42,7 @@ export const GAMES: GameMeta[] = [
     title: '2048',
     tagline: 'Slide, merge and chase the big tile',
     category: 'Puzzle',
-    icon: '🔢',
+    icon: 'grid',
     colors: ['#f59e0b', '#ef4444'],
     scoring: 'high',
     scoreLabel: 'Top score',
@@ -57,7 +58,7 @@ export const GAMES: GameMeta[] = [
     title: 'Reaction',
     tagline: 'How fast are your reflexes, really?',
     category: 'Reflex',
-    icon: '⚡',
+    icon: 'bolt',
     colors: ['#22d3ee', '#3b82f6'],
     scoring: 'low',
     scoreLabel: 'Best average',
@@ -73,7 +74,7 @@ export const GAMES: GameMeta[] = [
     title: 'Neon Snake',
     tagline: 'Grow long, never bite yourself',
     category: 'Arcade',
-    icon: '🐍',
+    icon: 'snake',
     colors: ['#a3e635', '#10b981'],
     scoring: 'high',
     scoreLabel: 'Longest run',
@@ -89,7 +90,7 @@ export const GAMES: GameMeta[] = [
     title: 'Tap Rush',
     tagline: 'Thirty seconds, endless targets',
     category: 'Reflex',
-    icon: '🎯',
+    icon: 'crosshair',
     colors: ['#fb7185', '#f43f5e'],
     scoring: 'high',
     scoreLabel: 'Most hits',
@@ -105,7 +106,7 @@ export const GAMES: GameMeta[] = [
     title: 'Echo',
     tagline: 'Repeat the pattern, one step longer each time',
     category: 'Memory',
-    icon: '🎵',
+    icon: 'waveform',
     colors: ['#6366f1', '#8b5cf6'],
     scoring: 'high',
     scoreLabel: 'Longest sequence',
@@ -121,7 +122,7 @@ export const GAMES: GameMeta[] = [
     title: 'Minefield',
     tagline: 'Read the numbers, flag the danger',
     category: 'Puzzle',
-    icon: '💎',
+    icon: 'gem',
     colors: ['#14b8a6', '#0ea5e9'],
     scoring: 'low',
     scoreLabel: 'Fastest clear',
@@ -137,7 +138,7 @@ export const GAMES: GameMeta[] = [
     title: 'Word Hunt',
     tagline: 'Six guesses to crack the five-letter word',
     category: 'Word',
-    icon: '🔤',
+    icon: 'letters',
     colors: ['#84cc16', '#22c55e'],
     scoring: 'low',
     scoreLabel: 'Fewest guesses',

@@ -54,7 +54,8 @@
   box-shadow: 0 0 26px -8px rgba(2, 6, 23, 0.9);
 }
 .tr__tinner {
-  font-size: 1.2rem;
+  display: grid;
+  place-items: center;
   color: #fff;
   line-height: 1;
   pointer-events: none;

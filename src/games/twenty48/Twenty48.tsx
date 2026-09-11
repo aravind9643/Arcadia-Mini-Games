@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { GameFrame, ResultOverlay } from '../../components/GameFrame'
+import { Icon } from '../../components/Icon'
 import { Stat, StatRow } from '../../components/ui'
 import { cue, sfx } from '../../lib/feedback'
 import { useArrowKeys, useStore, useSwipe, type Dir } from '../../lib/hooks'
@@ -117,41 +118,47 @@ export default function Twenty48() {
             <span key={i} className="t48__cell" />
           ))}
 
-          {tiles.map((t) => {
-            const { bg, fg, glow } = tileStyle(t.value)
-            return (
-              <motion.div
-                key={t.id}
-                className="t48__tile"
-                style={{
-                  background: bg,
-                  color: fg,
-                  boxShadow: glow ? `0 0 26px -4px ${glow}` : undefined,
-                  fontSize: t.value >= 1024 ? '1.42rem' : t.value >= 128 ? '1.62rem' : '1.9rem',
-                }}
-                initial={{
-                  left: `calc(${t.col} * (var(--cell) + var(--gap)))`,
-                  top: `calc(${t.row} * (var(--cell) + var(--gap)))`,
-                  scale: t.fresh ? 0 : 1,
-                  opacity: t.fresh ? 0 : 1,
-                }}
-                animate={{
-                  left: `calc(${t.col} * (var(--cell) + var(--gap)))`,
-                  top: `calc(${t.row} * (var(--cell) + var(--gap)))`,
-                  scale: t.merged ? [1.18, 1] : 1,
-                  opacity: 1,
-                }}
-                transition={{
-                  left: { type: 'spring', stiffness: 520, damping: 36 },
-                  top: { type: 'spring', stiffness: 520, damping: 36 },
-                  scale: { type: 'spring', stiffness: 460, damping: 22 },
-                  opacity: { duration: 0.14 },
-                }}
-              >
-                {t.value}
-              </motion.div>
-            )
-          })}
+          <div className="t48__layer">
+            {tiles.map((t) => {
+              const { bg, fg, glow } = tileStyle(t.value)
+              // one step = a quarter of the layer, so each cell sits at n/3 of
+              // the leftover space once its own width is accounted for
+              const pos = (n: number) => `calc(${n} * (25% + var(--gap) / 4))`
+              return (
+                <motion.div
+                  key={t.id}
+                  className="t48__tile"
+                  style={{
+                    background: bg,
+                    color: fg,
+                    boxShadow: glow ? `0 0 26px -4px ${glow}` : undefined,
+                    fontSize:
+                      t.value >= 1024 ? '1.42rem' : t.value >= 128 ? '1.62rem' : '1.9rem',
+                  }}
+                  initial={{
+                    left: pos(t.col),
+                    top: pos(t.row),
+                    scale: t.fresh ? 0 : 1,
+                    opacity: t.fresh ? 0 : 1,
+                  }}
+                  animate={{
+                    left: pos(t.col),
+                    top: pos(t.row),
+                    scale: t.merged ? [1.18, 1] : 1,
+                    opacity: 1,
+                  }}
+                  transition={{
+                    left: { type: 'spring', stiffness: 520, damping: 36 },
+                    top: { type: 'spring', stiffness: 520, damping: 36 },
+                    scale: { type: 'spring', stiffness: 460, damping: 22 },
+                    opacity: { duration: 0.14 },
+                  }}
+                >
+                  {t.value}
+                </motion.div>
+              )
+            })}
+          </div>
         </div>
 
         <p className="t48__hint">
@@ -184,7 +191,8 @@ export default function Twenty48() {
             exit={{ opacity: 0, y: -30 }}
             onClick={() => setWon(false)}
           >
-            🏆 2048 reached — tap to keep going
+            <Icon name="trophy" size={15} />
+            2048 reached — tap to keep going
           </motion.button>
         )}
       </AnimatePresence>

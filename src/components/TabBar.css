@@ -47,13 +47,12 @@
   z-index: -1;
 }
 .tab__icon {
-  font-size: 1.16rem;
+  display: grid;
+  place-items: center;
   line-height: 1;
-  filter: saturate(0.6);
-  transition: filter 0.22s var(--ease), transform 0.22s var(--ease);
+  transition: transform 0.22s var(--ease);
 }
 .tab.is-active .tab__icon {
-  filter: saturate(1.25);
   transform: translateY(-1px);
 }
 .tab__label {

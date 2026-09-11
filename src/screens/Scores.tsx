@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { grad } from '../components/GameFrame'
+import { Icon } from '../components/Icon'
 import { Empty, Stat, StatRow } from '../components/ui'
 import { GAMES } from '../games/registry'
 import { cue } from '../lib/feedback'
@@ -48,7 +49,7 @@ export function Scores() {
 
       {plays === 0 ? (
         <div className="scores__empty">
-          <Empty icon="🏆" title="No scores yet">
+          <Empty icon="trophy" title="No scores yet">
             Play a round and your bests will show up here — stored on this device.
           </Empty>
         </div>
@@ -71,7 +72,7 @@ export function Scores() {
                 }}
               >
                 <span className="srow__icon" style={{ background: grad(game) }}>
-                  {game.icon}
+                  <Icon name={game.icon} size={21} />
                 </span>
                 <span className="srow__text">
                   <strong>{game.title}</strong>
@@ -90,7 +91,10 @@ export function Scores() {
                       <span>{game.scoreLabel}</span>
                     </>
                   ) : (
-                    <span className="srow__play">Play ▸</span>
+                    <span className="srow__play">
+                      Play
+                      <Icon name="chevron-right" size={13} />
+                    </span>
                   )}
                 </span>
               </motion.button>

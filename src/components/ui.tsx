@@ -2,6 +2,7 @@ import { motion, type HTMLMotionProps } from 'framer-motion'
 import type { ReactNode } from 'react'
 import { cue } from '../lib/feedback'
 import { cx } from '../lib/utils'
+import { Icon, type IconName } from './Icon'
 import './ui.css'
 
 /* ---------------- Button ---------------- */
@@ -116,7 +117,7 @@ export function Toggle({
   onChange: (v: boolean) => void
   label: string
   hint?: string
-  icon?: ReactNode
+  icon?: IconName
 }) {
   return (
     <button
@@ -128,7 +129,11 @@ export function Toggle({
         onChange(!checked)
       }}
     >
-      {icon && <span className="toggle__icon">{icon}</span>}
+      {icon && (
+        <span className="toggle__icon">
+          <Icon name={icon} size={19} />
+        </span>
+      )}
       <span className="toggle__text">
         <span className="toggle__label">{label}</span>
         {hint && <span className="toggle__hint">{hint}</span>}
@@ -151,7 +156,7 @@ export function Empty({
   title,
   children,
 }: {
-  icon: string
+  icon: IconName
   title: string
   children?: ReactNode
 }) {
@@ -161,7 +166,9 @@ export function Empty({
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
     >
-      <span className="empty__icon">{icon}</span>
+      <span className="empty__icon">
+        <Icon name={icon} size={30} weight={1.7} />
+      </span>
       <h3>{title}</h3>
       {children && <p>{children}</p>}
     </motion.div>

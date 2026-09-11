@@ -151,7 +151,9 @@ export function useCountdown(durationMs: number, running: boolean, onEnd?: () =>
   const endRef = useRef(onEnd)
   endRef.current = onEnd
 
-  useEffect(() => setLeft(durationMs), [durationMs])
+  useEffect(() => {
+    setLeft(durationMs)
+  }, [durationMs])
 
   useEffect(() => {
     if (!running) return

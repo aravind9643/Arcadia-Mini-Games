@@ -63,7 +63,7 @@
   flex: 0 0 auto;
   border-radius: 14px;
   background: var(--g);
-  font-size: 1.4rem;
+  color: #fff;
   box-shadow: var(--shadow);
 }
 .cont__text {
@@ -99,8 +99,7 @@
   border-radius: 50%;
   background: var(--surface-2);
   border: 1px solid var(--stroke);
-  font-size: 0.7rem;
-  padding-left: 2px;
+  color: var(--text-dim);
 }
 
 /* ---------- controls ---------- */
@@ -132,9 +131,9 @@
 .home__search:focus-within {
   border-color: rgba(139, 92, 246, 0.55);
 }
-.home__search span {
-  font-size: 0.9rem;
-  opacity: 0.6;
+.home__search > svg {
+  flex: 0 0 auto;
+  color: var(--text-faint);
 }
 .home__search input {
   flex: 1;
@@ -173,6 +172,9 @@
   }
 }
 .fchip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   flex: 0 0 auto;
   padding: 9px 16px;
   border-radius: var(--r-full);
@@ -276,21 +278,20 @@
   height: 44px;
   border-radius: 14px;
   background: var(--g);
-  font-size: 1.35rem;
+  color: #fff;
   box-shadow: 0 10px 24px -12px rgba(0, 0, 0, 0.7);
 }
 .gcard__fav {
   pointer-events: auto;
   width: 32px;
   height: 32px;
-  font-size: 0.95rem;
   color: var(--text-faint);
   background: transparent;
   border-color: transparent;
 }
 .gcard__fav.is-on {
   color: var(--amber);
-  text-shadow: 0 0 14px rgba(251, 191, 36, 0.7);
+  filter: drop-shadow(0 0 9px rgba(251, 191, 36, 0.75));
 }
 
 .gcard__body {
@@ -327,6 +328,9 @@
   color: var(--text-faint);
 }
 .gcard__best {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   font-size: 0.74rem;
   font-weight: 700;
   padding: 3px 9px;

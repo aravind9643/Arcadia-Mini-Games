@@ -3,6 +3,7 @@ import { useState, type ReactNode } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { cue } from '../lib/feedback'
 import type { GameMeta } from '../games/registry'
+import { Icon } from './Icon'
 import { Button, IconButton } from './ui'
 import './GameFrame.css'
 
@@ -24,12 +25,12 @@ export function GameFrame({ game, hud, actions, onRestart, children }: Props) {
     <div className="gf">
       <header className="gf__bar">
         <IconButton label="Back to games" onClick={() => nav('/')}>
-          ‹
+          <Icon name="back" size={20} />
         </IconButton>
 
         <div className="gf__id">
           <span className="gf__icon" style={{ background: grad(game) }}>
-            {game.icon}
+            <Icon name={game.icon} size={21} />
           </span>
           <span className="gf__titles">
             <h1>{game.title}</h1>
@@ -40,7 +41,7 @@ export function GameFrame({ game, hud, actions, onRestart, children }: Props) {
         <div className="gf__tools">
           {actions}
           <IconButton label="How to play" onClick={() => setHelp(true)}>
-            ?
+            <Icon name="help" size={19} />
           </IconButton>
           {onRestart && (
             <IconButton
@@ -50,7 +51,7 @@ export function GameFrame({ game, hud, actions, onRestart, children }: Props) {
                 onRestart()
               }}
             >
-              ↻
+              <Icon name="restart" size={19} />
             </IconButton>
           )}
         </div>
@@ -176,16 +177,17 @@ export function ResultOverlay({
                 animate={{ scale: 1, rotate: -8 }}
                 transition={{ type: 'spring', stiffness: 400, damping: 12, delay: 0.22 }}
               >
-                ★ New best
+                <Icon name="star-filled" size={13} />
+                New best
               </motion.span>
             )}
             <motion.span
-              className="result__emoji"
+              className={`result__mark${won ? ' is-won' : ''}`}
               initial={{ scale: 0.3, rotate: -12 }}
               animate={{ scale: 1, rotate: 0 }}
               transition={{ type: 'spring', stiffness: 320, damping: 14, delay: 0.06 }}
             >
-              {won ? '🎉' : '💫'}
+              <Icon name={won ? 'trophy' : 'sparkles'} size={34} weight={1.7} />
             </motion.span>
             <h2>{headline}</h2>
             {detail && <div className="result__detail">{detail}</div>}

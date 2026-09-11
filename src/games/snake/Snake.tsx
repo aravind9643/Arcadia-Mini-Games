@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { GameFrame, ResultOverlay } from '../../components/GameFrame'
+import { Icon } from '../../components/Icon'
 import { Button, Stat, StatRow } from '../../components/ui'
 import { cue, sfx } from '../../lib/feedback'
 import { useArrowKeys, useStore, useSwipe, type Dir } from '../../lib/hooks'
@@ -218,7 +219,8 @@ export default function Snake() {
               setRunning((r) => !r)
             }}
           >
-            {running ? '❚❚' : '▶'}
+            <Icon name={running ? 'pause' : 'resume'} size={14} />
+            {running ? 'Pause' : 'Resume'}
           </Button>
         )
       }
@@ -246,16 +248,16 @@ export default function Snake() {
       {/* thumb D-pad — mobile players shouldn't have to swipe precisely */}
       <div className="snake__dpad" aria-hidden={false}>
         <button aria-label="Up" className="dp dp--u" onPointerDown={() => turn('up')}>
-          ▲
+          <Icon name="chevron-right" size={20} weight={2.4} />
         </button>
         <button aria-label="Left" className="dp dp--l" onPointerDown={() => turn('left')}>
-          ◀
+          <Icon name="chevron-right" size={20} weight={2.4} />
         </button>
         <button aria-label="Right" className="dp dp--r" onPointerDown={() => turn('right')}>
-          ▶
+          <Icon name="chevron-right" size={20} weight={2.4} />
         </button>
         <button aria-label="Down" className="dp dp--d" onPointerDown={() => turn('down')}>
-          ▼
+          <Icon name="chevron-right" size={20} weight={2.4} />
         </button>
       </div>
 

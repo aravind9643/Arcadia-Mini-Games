@@ -8,7 +8,47 @@ import { fmtTime, shuffle } from '../../lib/utils'
 import { byId } from '../registry'
 import './MemoryMatch.css'
 
-const GLYPHS = ['🚀', '🌙', '⭐', '🔥', '🌊', '🍀', '⚡', '🎈', '🍩', '👾']
+/**
+ * Card faces are simple filled SVG shapes rather than emoji: they stay
+ * identical across platforms and read clearly at small sizes.
+ */
+const GLYPHS: { id: string; color: string; path: string }[] = [
+  { id: 'circle', color: '#f472b6', path: 'M12 4a8 8 0 1 0 0 16 8 8 0 0 0 0-16Z' },
+  { id: 'square', color: '#22d3ee', path: 'M5.5 5.5h13v13h-13Z' },
+  { id: 'triangle', color: '#a3e635', path: 'M12 4.2 20 19H4Z' },
+  { id: 'diamond', color: '#fbbf24', path: 'M12 3.4 20.6 12 12 20.6 3.4 12Z' },
+  {
+    id: 'star',
+    color: '#c084fc',
+    path: 'm12 3.2 2.6 5.8 6.3.7-4.7 4.3 1.3 6.2L12 17.1l-5.5 3.1 1.3-6.2L3.1 9.7l6.3-.7L12 3.2Z',
+  },
+  {
+    id: 'heart',
+    color: '#fb7185',
+    path: 'M12 20.4 4.6 13a4.6 4.6 0 0 1 7.4-5.3A4.6 4.6 0 0 1 19.4 13Z',
+  },
+  { id: 'bolt', color: '#38bdf8', path: 'M13.6 2.4 5 13.4h5.4l-.9 8.2L18.6 10h-5.6Z' },
+  { id: 'hex', color: '#2dd4bf', path: 'M12 3.2 19.6 7.6v8.8L12 20.8 4.4 16.4V7.6Z' },
+  {
+    id: 'cross',
+    color: '#f97316',
+    path: 'M9.4 3.6h5.2v5.8h5.8v5.2h-5.8v5.8H9.4v-5.8H3.6V9.4h5.8Z',
+  },
+  {
+    id: 'drop',
+    color: '#818cf8',
+    path: 'M12 3.2c3.6 4.2 6 7.3 6 10a6 6 0 0 1-12 0c0-2.7 2.4-5.8 6-10Z',
+  },
+]
+
+function Glyph({ id }: { id: string }) {
+  const g = GLYPHS.find((x) => x.id === id)!
+  return (
+    <svg viewBox="0 0 24 24" width="56%" height="56%" aria-hidden="true">
+      <path d={g.path} fill={g.color} />
+    </svg>
+  )
+}
 
 type Difficulty = { name: string; pairs: number; cols: number }
 
@@ -21,7 +61,7 @@ const LEVELS: Difficulty[] = [
 type Card = { key: number; glyph: string; matched: boolean }
 
 const deal = (pairs: number): Card[] =>
-  shuffle(GLYPHS.slice(0, pairs).flatMap((g) => [g, g])).map((glyph, key) => ({
+  shuffle(GLYPHS.slice(0, pairs).flatMap((g) => [g.id, g.id])).map((glyph, key) => ({
     key,
     glyph,
     matched: false,
@@ -147,7 +187,7 @@ export default function MemoryMatch() {
               key={card.key}
               className="mm__card"
               onClick={() => flip(card.key)}
-              aria-label={face ? card.glyph : 'Hidden card'}
+              aria-label={face ? `${card.glyph} card` : 'Hidden card'}
               initial={{ opacity: 0, scale: 0.6 }}
               animate={{
                 opacity: 1,
@@ -172,7 +212,7 @@ export default function MemoryMatch() {
                 <span
                   className={`mm__face mm__face--front${card.matched ? ' is-matched' : ''}`}
                 >
-                  {card.glyph}
+                  <Glyph id={card.glyph} />
                 </span>
               </motion.span>
             </motion.button>

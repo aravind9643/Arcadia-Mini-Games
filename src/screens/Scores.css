@@ -47,7 +47,7 @@
   height: 42px;
   flex: 0 0 auto;
   border-radius: 13px;
-  font-size: 1.2rem;
+  color: #fff;
   box-shadow: 0 8px 20px -12px rgba(0, 0, 0, 0.8);
 }
 .srow__text {
@@ -90,6 +90,9 @@
   color: var(--text-faint);
 }
 .srow__play {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
   font-size: 0.8rem !important;
   font-weight: 700;
   text-transform: none !important;

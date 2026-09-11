@@ -74,17 +74,27 @@
   color: var(--lime);
   transform: scale(0.93);
 }
+/* one chevron glyph, rotated per direction */
 .dp--u {
   grid-area: u;
 }
+.dp--u > svg {
+  rotate: -90deg;
+}
 .dp--l {
   grid-area: l;
+}
+.dp--l > svg {
+  rotate: 180deg;
 }
 .dp--r {
   grid-area: r;
 }
 .dp--d {
   grid-area: d;
+}
+.dp--d > svg {
+  rotate: 90deg;
 }
 
 /* Pointer devices have the arrow keys — reclaim the space. */

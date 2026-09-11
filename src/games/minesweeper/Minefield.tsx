@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { GameFrame, ResultOverlay } from '../../components/GameFrame'
+import { Icon } from '../../components/Icon'
 import { Button, Stat, StatRow } from '../../components/ui'
 import { cue, sfx } from '../../lib/feedback'
 import { useStore } from '../../lib/hooks'
@@ -196,7 +197,8 @@ export default function Minefield() {
           onClick={() => setFlagMode((f) => !f)}
           aria-pressed={flagMode}
         >
-          {flagMode ? '🚩 Flag' : '⛏ Dig'}
+          <Icon name={flagMode ? 'flag' : 'gem'} size={14} />
+          {flagMode ? 'Flag' : 'Dig'}
         </Button>
       }
     >
@@ -243,13 +245,23 @@ export default function Minefield() {
             style={{ color: c.near ? NUM_COLORS[c.near] : undefined }}
             aria-label={c.open ? (c.mine ? 'Mine' : `${c.near} adjacent mines`) : 'Hidden tile'}
           >
-            {c.open ? (c.mine ? '💥' : c.near || '') : c.flag ? '🚩' : ''}
+            {c.open ? (
+              c.mine ? (
+                <Icon name="bomb" size={15} />
+              ) : (
+                c.near || ''
+              )
+            ) : c.flag ? (
+              <Icon name="flag" size={14} />
+            ) : (
+              ''
+            )}
           </motion.button>
         ))}
       </div>
 
       <p className="mf__hint">
-        <span className="mf__hint--touch">Long-press to flag · or switch to 🚩 mode</span>
+        <span className="mf__hint--touch">Long-press to flag · or switch to Flag mode</span>
         <span className="mf__hint--keys">Right-click to flag a suspected mine</span>
       </p>
 

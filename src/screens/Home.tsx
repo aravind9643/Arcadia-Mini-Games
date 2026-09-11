@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { grad } from '../components/GameFrame'
+import { Icon } from '../components/Icon'
 import { IconButton, SectionTitle } from '../components/ui'
 import { CATEGORIES, GAMES, type GameCategory, type GameMeta } from '../games/registry'
 import { cue } from '../lib/feedback'
@@ -70,9 +71,13 @@ export function Home() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.12 }}
         >
-          <span className="chip">🎲 {fmtNum(totalPlays)} rounds played</span>
           <span className="chip">
-            🏅 {played}/{GAMES.length} tried
+            <Icon name="dice" size={14} />
+            {fmtNum(totalPlays)} rounds played
+          </span>
+          <span className="chip">
+            <Icon name="medal" size={14} />
+            {played}/{GAMES.length} tried
           </span>
         </motion.div>
       </header>
@@ -84,7 +89,7 @@ export function Home() {
       {/* filters + search */}
       <div className="home__controls">
         <div className="home__search">
-          <span aria-hidden>🔍</span>
+          <Icon name="search" size={17} />
           <input
             value={query}
             onChange={(e) => setQuery(e.target.value)}
@@ -105,7 +110,14 @@ export function Home() {
                 setFilter(f)
               }}
             >
-              {f === 'Favorites' ? '★ Favorites' : f}
+              {f === 'Favorites' ? (
+                <>
+                  <Icon name="star-filled" size={13} />
+                  Favorites
+                </>
+              ) : (
+                f
+              )}
             </button>
           ))}
         </div>
@@ -160,12 +172,16 @@ function ContinueCard({ game }: { game: GameMeta }) {
       style={{ ['--g' as string]: grad(game) }}
     >
       <span className="cont__glow" />
-      <span className="cont__icon">{game.icon}</span>
+      <span className="cont__icon">
+        <Icon name={game.icon} size={23} />
+      </span>
       <span className="cont__text">
         <span className="cont__label">Jump back in</span>
         <strong>{game.title}</strong>
       </span>
-      <span className="cont__go">▶</span>
+      <span className="cont__go">
+        <Icon name="chevron-right" size={16} />
+      </span>
     </motion.button>
   )
 }
@@ -211,7 +227,9 @@ function GameCard({ game, index }: { game: GameMeta; index: number }) {
         <span className="gcard__wash" aria-hidden />
 
         <header className="gcard__top">
-          <span className="gcard__icon">{game.icon}</span>
+          <span className="gcard__icon">
+            <Icon name={game.icon} size={22} />
+          </span>
           <IconButton
             label={fav ? `Unfavorite ${game.title}` : `Favorite ${game.title}`}
             className={cx('gcard__fav', fav && 'is-on')}
@@ -220,7 +238,7 @@ function GameCard({ game, index }: { game: GameMeta; index: number }) {
               store.toggleFavorite(game.id)
             }}
           >
-            {fav ? '★' : '☆'}
+            <Icon name={fav ? 'star-filled' : 'star'} size={17} />
           </IconButton>
         </header>
 
@@ -233,7 +251,8 @@ function GameCard({ game, index }: { game: GameMeta; index: number }) {
           <span className="gcard__cat">{game.category}</span>
           {best ? (
             <span className="gcard__best mono" title={game.scoreLabel}>
-              ★ {best}
+              <Icon name="star-filled" size={11} />
+              {best}
             </span>
           ) : (
             <span className="gcard__new">New</span>

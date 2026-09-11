@@ -26,7 +26,9 @@ export default function Reaction() {
   const goAt = useRef(0)
   const timer = useRef<number | undefined>(undefined)
 
-  const clear = () => window.clearTimeout(timer.current)
+  const clear = () => {
+    window.clearTimeout(timer.current)
+  }
   useEffect(() => clear, [])
 
   const arm = useCallback(() => {

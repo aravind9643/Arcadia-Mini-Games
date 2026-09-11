@@ -35,7 +35,9 @@ export default function App() {
   }, [])
 
   // Never restore a scroll position across routes.
-  useEffect(() => window.scrollTo(0, 0), [location.pathname])
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [location.pathname])
 
   return (
     <>
@@ -75,7 +77,7 @@ export default function App() {
             element={
               <Page>
                 <div className="page shell">
-                  <Empty icon="🕹️" title="Nothing here">
+                  <Empty icon="gamepad" title="Nothing here">
                     That screen doesn't exist. Head back to the arcade.
                   </Empty>
                 </div>

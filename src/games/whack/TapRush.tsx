@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { GameFrame, ResultOverlay } from '../../components/GameFrame'
+import { Icon } from '../../components/Icon'
 import { Stat, StatRow } from '../../components/ui'
 import { cue, sfx } from '../../lib/feedback'
 import { useStore } from '../../lib/hooks'
@@ -226,7 +227,9 @@ export default function TapRush() {
                 onPointerDown={() => tap(t)}
                 aria-label={t.bomb ? 'Bomb — do not tap' : 'Target'}
               >
-                <span className="tr__tinner">{t.bomb ? '💣' : '◎'}</span>
+                <span className="tr__tinner">
+                  <Icon name={t.bomb ? 'bomb' : 'target'} size={t.bomb ? 22 : 26} weight={2.1} />
+                </span>
                 <motion.span
                   className="tr__tring"
                   initial={{ scale: 1, opacity: 0.55 }}
@@ -273,7 +276,7 @@ export default function TapRush() {
               onClick={start}
             >
               <strong>Tap to start</strong>
-              <span>30 seconds · chain hits for multipliers · avoid 💣</span>
+              <span>30 seconds · chain hits for multipliers · avoid the bombs</span>
             </motion.button>
           )}
         </div>

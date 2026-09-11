@@ -1,13 +1,14 @@
 import { motion } from 'framer-motion'
 import { NavLink, useLocation } from 'react-router-dom'
 import { cue } from '../lib/feedback'
+import { Icon, type IconName } from './Icon'
 import './TabBar.css'
 
-const TABS = [
-  { to: '/', label: 'Play', icon: '🎮' },
-  { to: '/scores', label: 'Scores', icon: '🏆' },
-  { to: '/settings', label: 'Settings', icon: '⚙️' },
-] as const
+const TABS: { to: string; label: string; icon: IconName }[] = [
+  { to: '/', label: 'Play', icon: 'gamepad' },
+  { to: '/scores', label: 'Scores', icon: 'trophy' },
+  { to: '/settings', label: 'Settings', icon: 'settings' },
+]
 
 export function TabBar() {
   const { pathname } = useLocation()
@@ -35,7 +36,9 @@ export function TabBar() {
                     transition={{ type: 'spring', stiffness: 480, damping: 34 }}
                   />
                 )}
-                <span className="tab__icon">{t.icon}</span>
+                <span className="tab__icon">
+                  <Icon name={t.icon} size={21} />
+                </span>
                 <span className="tab__label">{t.label}</span>
               </>
             )}

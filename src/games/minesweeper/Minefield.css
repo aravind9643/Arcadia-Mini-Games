@@ -60,6 +60,11 @@
 .mf__c.is-mine {
   background: linear-gradient(150deg, rgba(225, 29, 72, 0.34), rgba(159, 18, 57, 0.22));
   border-color: rgba(251, 113, 133, 0.45);
+  color: #fb7185;
+}
+/* flag sits on an unopened tile, so it needs its own accent */
+.mf__c:not(.is-open) > svg {
+  color: var(--amber);
 }
 
 .mf__hint {

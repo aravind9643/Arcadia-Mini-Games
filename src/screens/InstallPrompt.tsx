@@ -1,5 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
+import { Icon } from '../components/Icon'
 import { Button, IconButton } from '../components/ui'
 import './InstallPrompt.css'
 
@@ -58,7 +59,9 @@ export function InstallPrompt() {
           exit={{ opacity: 0, y: -10, height: 0 }}
           transition={{ type: 'spring', stiffness: 280, damping: 30 }}
         >
-          <span className="install__icon">📲</span>
+          <span className="install__icon">
+            <Icon name="install" size={20} />
+          </span>
           <div className="install__text">
             <strong>Install Arcadia</strong>
             <p>
@@ -82,7 +85,7 @@ export function InstallPrompt() {
             </Button>
           )}
           <IconButton label="Dismiss" className="install__x" onClick={dismiss}>
-            ✕
+            <Icon name="close" size={15} />
           </IconButton>
         </motion.div>
       )}

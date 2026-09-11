@@ -154,13 +154,14 @@
   border-color: var(--stroke-2);
 }
 .toggle__icon {
-  font-size: 1.2rem;
   display: grid;
   place-items: center;
   width: 34px;
   height: 34px;
+  flex: 0 0 auto;
   border-radius: var(--r-sm);
   background: var(--surface-2);
+  color: var(--text-dim);
 }
 .toggle__text {
   display: flex;
@@ -214,7 +215,15 @@
   text-align: center;
 }
 .empty__icon {
-  font-size: 2.4rem;
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  margin-bottom: 4px;
+  border-radius: 50%;
+  background: var(--surface-2);
+  border: 1px solid var(--stroke);
+  color: var(--text-faint);
 }
 .empty h3 {
   font-size: 1.02rem;

@@ -38,7 +38,14 @@
   border-top: 1px solid var(--stroke);
 }
 .settings__mark {
-  font-size: 1.7rem;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  background: linear-gradient(140deg, var(--violet), var(--cyan));
+  color: #fff;
+  box-shadow: var(--shadow);
 }
 .settings__foot strong {
   font-size: 1rem;

@@ -8,18 +8,16 @@
 }
 
 .t48__grid {
-  /* --cell drives both the static cells and the absolute tile offsets */
   --gap: clamp(7px, 2.4vw, 12px);
-  --board: min(100%, 420px);
-  --cell: calc((var(--board) - 5 * var(--gap)) / 4);
-
   position: relative;
   display: grid;
-  grid-template-columns: repeat(4, var(--cell));
-  grid-template-rows: repeat(4, var(--cell));
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
   gap: var(--gap);
   padding: var(--gap);
-  width: var(--board);
+  width: 100%;
+  max-width: 420px;
+  aspect-ratio: 1;
   border-radius: var(--r-lg);
   background: var(--surface);
   border: 1px solid var(--stroke);
@@ -31,12 +29,17 @@
   background: var(--surface);
 }
 
+/* Tiles float above the cells inside the padded area. Positions are
+   percentages of that area, so they track any board size exactly. */
+.t48__layer {
+  position: absolute;
+  inset: var(--gap);
+}
 .t48__tile {
   position: absolute;
-  /* offset by the board's own padding */
-  margin: var(--gap);
-  width: var(--cell);
-  height: var(--cell);
+  /* 4 cells + 3 gaps across the layer: each cell is 1/4 minus its gap share */
+  width: calc((100% - 3 * var(--gap)) / 4);
+  height: calc((100% - 3 * var(--gap)) / 4);
   display: grid;
   place-items: center;
   border-radius: var(--r-md);
@@ -44,7 +47,7 @@
   font-weight: 700;
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.03em;
-  will-change: transform, left, top;
+  will-change: transform;
 }
 
 .t48__scorewrap {
@@ -85,6 +88,9 @@
   left: 50%;
   transform: translateX(-50%);
   z-index: 70;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
   padding: 11px 20px;
   border-radius: var(--r-full);
   background: linear-gradient(100deg, var(--amber), #f97316);
