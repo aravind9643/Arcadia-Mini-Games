@@ -207,10 +207,11 @@ const PATHS: Record<IconName, ReactElement> = {
   ),
 
   /* ---------- per-game marks ---------- */
+  /* A matched pair of cards, one filled — reads clearly at 22px. */
   brain: (
     <>
-      <path d="M12 5.4a3 3 0 0 0-5.6-1.1 2.9 2.9 0 0 0-2.2 4.5A3.1 3.1 0 0 0 4 13.4a3 3 0 0 0 2.2 4.8A3 3 0 0 0 12 18V5.4Z" />
-      <path d="M12 5.4a3 3 0 0 1 5.6-1.1 2.9 2.9 0 0 1 2.2 4.5 3.1 3.1 0 0 1 .2 4.6 3 3 0 0 1-2.2 4.8A3 3 0 0 1 12 18V5.4Z" />
+      <rect x="2.8" y="4.6" width="8.4" height="12" rx="2.1" fill="currentColor" />
+      <rect x="12.8" y="7.4" width="8.4" height="12" rx="2.1" />
     </>
   ),
   grid: (
@@ -220,11 +221,13 @@ const PATHS: Record<IconName, ReactElement> = {
     </>
   ),
   bolt: <path d="M13.4 2.4 4.8 13.2h5.6l-.8 8.4 8.6-10.8h-5.6l.8-8.4Z" />,
+  /* Segmented body on a grid + a pellet — reads as "snake game", not a letter. */
   snake: (
     <>
-      <path d="M4.4 18.6h7.2a3.6 3.6 0 0 0 0-7.2H8a3.6 3.6 0 0 1 0-7.2h7.4" />
-      <circle cx="18.4" cy="4.2" r="2.4" />
-      <circle cx="18.8" cy="3.6" r=".7" fill="currentColor" stroke="none" />
+      <path d="M4.6 6.2h5.6v5.6H4.6z" />
+      <path d="M10.2 11.8h5.6v5.6h-5.6z" />
+      <path d="M4.6 11.8h5.6" />
+      <circle cx="18.6" cy="6.4" r="1.8" fill="currentColor" stroke="none" />
     </>
   ),
   crosshair: (
@@ -241,11 +244,12 @@ const PATHS: Record<IconName, ReactElement> = {
       <path d="M2.6 8.8h18.8M8.8 3.4 12 20.6l3.2-17.2" />
     </>
   ),
+  /* Word-game tiles: a filled "found" tile beside two empty ones. */
   letters: (
     <>
-      <rect x="2.6" y="4.4" width="18.8" height="15.2" rx="3" />
-      <path d="M7 15.2 9.6 8.8l2.6 6.4M7.8 13.4h3.6" />
-      <path d="M14.8 15.2V8.8h2a1.8 1.8 0 0 1 0 3.6h-2" />
+      <rect x="2.6" y="5.4" width="6.2" height="13.2" rx="1.9" fill="currentColor" />
+      <rect x="10.4" y="5.4" width="6.2" height="13.2" rx="1.9" />
+      <rect x="18.2" y="5.4" width="3.2" height="13.2" rx="1.6" />
     </>
   ),
 }
