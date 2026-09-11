@@ -1,0 +1,58 @@
+.fd {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 340px;
+}
+
+.fd__next {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 15px 7px 13px;
+  border-radius: var(--r-full);
+  background: var(--surface);
+  border: 1px solid var(--stroke);
+}
+.fd__next span {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+.fd__next i {
+  display: block;
+  border-radius: 50%;
+  background-image: radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.7), transparent 55%);
+  box-shadow: inset 0 -2px 4px rgba(0, 0, 0, 0.28);
+}
+
+.fd__jar {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 100 / 112;
+  overflow: hidden;
+  /* open at the top, walled on three sides — reads as a jar */
+  border: 3px solid var(--stroke-2);
+  border-top: 0;
+  border-radius: 0 0 var(--r-lg) var(--r-lg);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.07));
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: crosshair;
+}
+.fd__canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.fd__hint {
+  font-size: 0.8rem;
+  color: var(--text-faint);
+  text-align: center;
+}

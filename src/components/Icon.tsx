@@ -57,6 +57,12 @@ export type IconName =
   | 'paddle'
   | 'bulb'
   | 'bubbles'
+  | 'groups'
+  | 'fruit'
+  | 'triple'
+  | 'traffic'
+  | 'globe'
+  | 'swatch'
 
 type Props = SVGProps<SVGSVGElement> & {
   name: IconName
@@ -378,6 +384,58 @@ const PATHS: Record<IconName, ReactElement> = {
       <circle cx="8.6" cy="14.4" r="5.2" />
       <circle cx="16.4" cy="8.6" r="3.6" />
       <circle cx="6.6" cy="6.4" r="2.2" />
+    </>
+  ),
+
+  /* Four rows of tiles — one solved group filled. */
+  groups: (
+    <>
+      <rect x="2.6" y="3.4" width="18.8" height="4" rx="1.4" fill="currentColor" />
+      <rect x="2.6" y="9.2" width="8.6" height="4" rx="1.4" />
+      <rect x="12.8" y="9.2" width="8.6" height="4" rx="1.4" />
+      <rect x="2.6" y="15" width="8.6" height="4" rx="1.4" />
+      <rect x="12.8" y="15" width="8.6" height="4" rx="1.4" />
+    </>
+  ),
+  /* Merged circles of growing size, in a container. */
+  fruit: (
+    <>
+      <path d="M3.8 5.6v10a5 5 0 0 0 5 5h6.4a5 5 0 0 0 5-5v-10" />
+      <circle cx="9" cy="14.6" r="4" />
+      <circle cx="16.4" cy="16" r="2.6" />
+      <circle cx="14.6" cy="9" r="2" />
+    </>
+  ),
+  /* Three identical tiles, the match-3 trio. */
+  triple: (
+    <>
+      <rect x="2.4" y="8.6" width="6" height="6.8" rx="1.6" fill="currentColor" />
+      <rect x="9" y="8.6" width="6" height="6.8" rx="1.6" fill="currentColor" />
+      <rect x="15.6" y="8.6" width="6" height="6.8" rx="1.6" />
+    </>
+  ),
+  /* Lane markings with a car crossing. */
+  traffic: (
+    <>
+      <path d="M3.4 3.4v17.2M20.6 3.4v17.2" />
+      <path d="M12 3.4v3M12 10.4v3M12 17.4v3" />
+      <rect x="6.2" y="9.6" width="5.2" height="4.8" rx="1.4" fill="currentColor" stroke="none" />
+    </>
+  ),
+  /* A globe with meridians. */
+  globe: (
+    <>
+      <circle cx="12" cy="12" r="8.6" />
+      <path d="M3.4 12h17.2" />
+      <path d="M12 3.4a13 13 0 0 1 0 17.2 13 13 0 0 1 0-17.2Z" />
+    </>
+  ),
+  /* Overlapping colour swatches. */
+  swatch: (
+    <>
+      <rect x="2.8" y="2.8" width="10" height="10" rx="2.4" fill="currentColor" />
+      <rect x="11.2" y="11.2" width="10" height="10" rx="2.4" />
+      <path d="M11.2 6.6h4.4a2 2 0 0 1 2 2v2.6" />
     </>
   ),
 }

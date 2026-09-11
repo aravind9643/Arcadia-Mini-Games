@@ -1,6 +1,6 @@
 # Arcadia — Mini Games
 
-A mobile-first PWA arcade of twenty mini games, built with React 19, TypeScript, Vite and Framer Motion. Installable, and fully playable offline.
+A mobile-first PWA arcade of twenty-six mini games, built with React 19, TypeScript, Vite and Framer Motion. Installable, and fully playable offline.
 
 ## Run it
 
@@ -37,6 +37,14 @@ The service worker only runs in a production build, so use `preview` to test ins
 | Word Hunt | Word | fewest guesses |
 | Hangman | Word | longest streak |
 | Anagram Rush | Word | top score |
+| Common Thread | Word | fewest mistakes |
+| Flag Hunt | Word | best round |
+| Fruit Drop | Puzzle | top score |
+| Triple Tile | Puzzle | top score |
+| Road Hop | Arcade | furthest hop |
+| Odd Shade | Reflex | highest level |
+
+**On naming:** several of these follow mechanics popularised by well-known games (Connections, Suika/Watermelon, Triple Match, Crossy Road). Each is an independent implementation with its own name, artwork and content — no assets, word lists or puzzle data are taken from those titles.
 
 The two Strategy games ship real opponents rather than random movers. Tic-Tac-Toe uses full **minimax** with depth preference, so Hard is unbeatable — a draw is the best available result. Connect Four uses **minimax with alpha-beta pruning** (depth 5 on Hard) over a positional evaluation that weights centre control and blocks imminent threats. Both were verified by scripted play: random moves won 0 of 6 against Tic-Tac-Toe's Hard AI and 0 of 4 against Connect Four's.
 

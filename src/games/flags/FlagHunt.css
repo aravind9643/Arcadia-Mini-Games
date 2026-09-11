@@ -1,0 +1,105 @@
+.fh {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  width: 100%;
+  max-width: 420px;
+}
+
+.fh__bar {
+  width: 100%;
+  height: 7px;
+  border-radius: var(--r-full);
+  overflow: hidden;
+  background: var(--surface-2);
+  border: 1px solid var(--stroke);
+}
+.fh__barfill {
+  display: block;
+  height: 100%;
+  border-radius: var(--r-full);
+}
+
+.fh__flag {
+  width: 100%;
+  max-width: 260px;
+  aspect-ratio: 3 / 2;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--stroke-2);
+  box-shadow: var(--shadow);
+  perspective: 700px;
+}
+.fh__flag svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.fh__options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  width: 100%;
+}
+.fh__opt {
+  padding: 15px 10px;
+  border-radius: var(--r-md);
+  background: var(--surface-2);
+  border: 1px solid var(--stroke);
+  font-size: 0.9rem;
+  font-weight: 660;
+  transition: all 0.18s var(--ease);
+}
+.fh__opt:hover:not(:disabled) {
+  background: var(--surface);
+  border-color: var(--stroke-2);
+}
+.fh__opt.is-right {
+  background: linear-gradient(150deg, #22c55e, #16a34a);
+  border-color: transparent;
+  color: #04210f;
+}
+.fh__opt.is-wrong {
+  background: linear-gradient(150deg, #e11d48, #9f1239);
+  border-color: transparent;
+  color: #fff;
+}
+.fh__opt.is-dim {
+  opacity: 0.35;
+}
+
+.fh__veil {
+  position: absolute;
+  inset: -10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 24px;
+  text-align: center;
+  border-radius: var(--r-lg);
+  background: color-mix(in srgb, var(--bg) 80%, transparent);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+.fh__veil strong {
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+}
+.fh__veil span {
+  font-size: 0.86rem;
+  color: var(--text-dim);
+  max-width: 26ch;
+  line-height: 1.5;
+}
+
+.fh__note {
+  font-size: 0.72rem;
+  color: var(--text-faint);
+  text-align: center;
+}
