@@ -1,0 +1,112 @@
+.c4__levels {
+  display: flex;
+  gap: 7px;
+}
+.c4__lvl {
+  padding: 8px 17px;
+  border-radius: var(--r-full);
+  background: var(--surface);
+  border: 1px solid var(--stroke);
+  color: var(--text-dim);
+  font-size: 0.82rem;
+  font-weight: 640;
+  transition: all 0.2s var(--ease);
+}
+.c4__lvl.is-on {
+  color: #fff;
+  background: linear-gradient(105deg, #f43f5e, #facc15);
+  border-color: transparent;
+  box-shadow: 0 8px 20px -10px rgba(244, 63, 94, 0.85);
+}
+
+.c4 {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+}
+
+/* transparent column buttons layered over the board */
+.c4__cols {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+  padding: 8px;
+}
+.c4__col {
+  position: relative;
+  border-radius: var(--r-sm);
+  transition: background 0.18s var(--ease);
+}
+.c4__col:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.06);
+}
+.c4__col:disabled {
+  cursor: default;
+}
+.c4__ghost {
+  position: absolute;
+  top: 2%;
+  left: 50%;
+  translate: -50% 0;
+  width: 78%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: rgba(244, 63, 94, 0.32);
+  border: 2px dashed rgba(251, 113, 133, 0.7);
+}
+
+.c4__grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  gap: 5px;
+  padding: 8px;
+  aspect-ratio: 7 / 6;
+  border-radius: var(--r-lg);
+  background: linear-gradient(160deg, rgba(99, 102, 241, 0.22), rgba(14, 165, 233, 0.14));
+  border: 1px solid var(--stroke);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+.c4__cell {
+  position: relative;
+  border-radius: 50%;
+  overflow: hidden;
+  /* the "hole" the disc falls into */
+  background: var(--bg);
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+.c4__disc {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+}
+.c4__disc--you {
+  background: radial-gradient(circle at 34% 30%, #fda4af, #e11d48 68%);
+  box-shadow: inset 0 -3px 6px rgba(0, 0, 0, 0.32);
+}
+.c4__disc--ai {
+  background: radial-gradient(circle at 34% 30%, #fef08a, #eab308 68%);
+  box-shadow: inset 0 -3px 6px rgba(0, 0, 0, 0.3);
+}
+.c4__disc.is-win {
+  outline: 3px solid #fff;
+  outline-offset: -3px;
+  animation: c4-pulse 0.85s ease-in-out infinite alternate;
+}
+@keyframes c4-pulse {
+  to {
+    filter: brightness(1.35);
+  }
+}
+
+.c4__turn {
+  font-size: 0.9rem;
+  font-weight: 620;
+  color: var(--text-dim);
+  text-align: center;
+  min-height: 1.3em;
+}

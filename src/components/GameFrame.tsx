@@ -143,6 +143,7 @@ export function ResultOverlay({
   detail,
   isBest,
   onAgain,
+  againLabel = 'Play again',
   extra,
 }: {
   open: boolean
@@ -151,6 +152,8 @@ export function ResultOverlay({
   detail?: ReactNode
   isBest?: boolean
   onAgain: () => void
+  /** Override when the action continues the run rather than restarting it. */
+  againLabel?: string
   extra?: ReactNode
 }) {
   const nav = useNavigate()
@@ -194,7 +197,7 @@ export function ResultOverlay({
             {extra}
             <div className="result__actions">
               <Button variant="primary" size="lg" full onClick={onAgain}>
-                Play again
+                {againLabel}
               </Button>
               <Button variant="ghost" full onClick={() => nav('/')}>
                 Back to games

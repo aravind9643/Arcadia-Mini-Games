@@ -43,6 +43,14 @@ export type IconName =
   | 'waveform'
   | 'gem'
   | 'letters'
+  | 'blocks'
+  | 'wing'
+  | 'sudoku'
+  | 'discs'
+  | 'bricks'
+  | 'noughts'
+  | 'undo'
+  | 'rotate-cw'
 
 type Props = SVGProps<SVGSVGElement> & {
   name: IconName
@@ -250,6 +258,69 @@ const PATHS: Record<IconName, ReactElement> = {
       <rect x="2.6" y="5.4" width="6.2" height="13.2" rx="1.9" fill="currentColor" />
       <rect x="10.4" y="5.4" width="6.2" height="13.2" rx="1.9" />
       <rect x="18.2" y="5.4" width="3.2" height="13.2" rx="1.6" />
+    </>
+  ),
+
+  /* An S-tetromino stack. */
+  blocks: (
+    <>
+      <rect x="3" y="12.6" width="8.4" height="8.4" rx="1.5" fill="currentColor" />
+      <rect x="11.4" y="12.6" width="8.4" height="8.4" rx="1.5" />
+      <rect x="7.2" y="4.2" width="8.4" height="8.4" rx="1.5" />
+    </>
+  ),
+  /* A bird-ish wing between two pipe gaps. */
+  wing: (
+    <>
+      <path d="M3.4 12a5.4 5.4 0 0 1 9.6-3.4l4.2 1.2-2 2.2 2 2.2-4.2 1.2A5.4 5.4 0 0 1 3.4 12Z" />
+      <circle cx="8" cy="10.4" r=".95" fill="currentColor" stroke="none" />
+      <path d="M20.6 4v4.2M20.6 15.8V20" />
+    </>
+  ),
+  /* 3x3 of boxes with one filled — the sudoku subgrid. */
+  sudoku: (
+    <>
+      <rect x="3.2" y="3.2" width="17.6" height="17.6" rx="2.6" />
+      <path d="M9.07 3.2v17.6M14.93 3.2v17.6M3.2 9.07h17.6M3.2 14.93h17.6" />
+      <rect x="9.07" y="9.07" width="5.86" height="5.86" fill="currentColor" stroke="none" />
+    </>
+  ),
+  /* Stacked discs in a column — Connect Four. */
+  discs: (
+    <>
+      <rect x="3.2" y="3.2" width="17.6" height="17.6" rx="2.8" />
+      <circle cx="8.5" cy="15.4" r="2.5" fill="currentColor" stroke="none" />
+      <circle cx="15.5" cy="15.4" r="2.5" />
+      <circle cx="8.5" cy="8.6" r="2.5" />
+    </>
+  ),
+  /* Brick rows above a paddle and ball. */
+  bricks: (
+    <>
+      <path d="M3.2 4.6h17.6M3.2 9h17.6M8 4.6V9M14.6 4.6V9" />
+      <rect x="3.2" y="4.6" width="17.6" height="4.4" rx="1" />
+      <circle cx="15.4" cy="13.6" r="1.5" fill="currentColor" stroke="none" />
+      <rect x="6.6" y="18" width="10.8" height="2.6" rx="1.3" fill="currentColor" stroke="none" />
+    </>
+  ),
+  /* An O and an X, side by side. */
+  noughts: (
+    <>
+      <circle cx="8" cy="8" r="4" />
+      <path d="M13.4 13.4 20.4 20.4M20.4 13.4l-7 7" />
+    </>
+  ),
+
+  undo: (
+    <>
+      <path d="M4 12a8 8 0 1 0 2.6-5.9" />
+      <path d="M4 4v4.6h4.6" />
+    </>
+  ),
+  'rotate-cw': (
+    <>
+      <path d="M20 12a8 8 0 1 1-2.6-5.9" />
+      <path d="M20 4v4.6h-4.6" />
     </>
   ),
 }

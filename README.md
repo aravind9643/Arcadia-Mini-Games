@@ -1,6 +1,6 @@
 # Arcadia — Mini Games
 
-A mobile-first PWA arcade of eight mini games, built with React 19, TypeScript, Vite and Framer Motion. Installable, and fully playable offline.
+A mobile-first PWA arcade of fourteen mini games, built with React 19, TypeScript, Vite and Framer Motion. Installable, and fully playable offline.
 
 ## Run it
 
@@ -19,12 +19,20 @@ The service worker only runs in a production build, so use `preview` to test ins
 | --- | --- | --- |
 | Memory Match | Memory | fewest moves |
 | 2048 | Puzzle | top score |
-| Reaction | Reflex | best average (ms) |
-| Neon Snake | Arcade | longest run |
-| Tap Rush | Reflex | most points in 30s |
-| Echo | Memory | longest sequence |
+| Sudoku | Puzzle | fastest solve |
 | Minefield | Puzzle | fastest clear |
+| Block Drop (Tetris) | Arcade | top score |
+| Brick Breaker | Arcade | top score |
+| Neon Snake | Arcade | longest run |
+| Sky Hop (Flappy) | Reflex | most pipes |
+| Reaction | Reflex | best average (ms) |
+| Tap Rush | Reflex | most points in 30s |
+| Connect Four | Strategy | wins |
+| Tic-Tac-Toe | Strategy | wins |
+| Echo | Memory | longest sequence |
 | Word Hunt | Word | fewest guesses |
+
+The two Strategy games ship real opponents rather than random movers. Tic-Tac-Toe uses full **minimax** with depth preference, so Hard is unbeatable — a draw is the best available result. Connect Four uses **minimax with alpha-beta pruning** (depth 5 on Hard) over a positional evaluation that weights centre control and blocks imminent threats. Both were verified by scripted play: random moves won 0 of 6 against Tic-Tac-Toe's Hard AI and 0 of 4 against Connect Four's.
 
 Each game is lazily loaded as its own chunk, so the initial download stays small.
 

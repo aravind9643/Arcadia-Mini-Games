@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { GameFrame, ResultOverlay } from '../../components/GameFrame'
 import { Icon } from '../../components/Icon'
-import { Button, Stat, StatRow } from '../../components/ui'
+import { IconButton, Stat, StatRow } from '../../components/ui'
 import { cue, sfx } from '../../lib/feedback'
 import { useArrowKeys, useStore, useSwipe, type Dir } from '../../lib/hooks'
 import { store } from '../../lib/storage'
@@ -211,17 +211,15 @@ export default function Snake() {
       actions={
         started &&
         !over && (
-          <Button
-            size="sm"
-            variant="surface"
+          <IconButton
+            label={running ? 'Pause' : 'Resume'}
             onClick={() => {
               cue('tick')
               setRunning((r) => !r)
             }}
           >
-            <Icon name={running ? 'pause' : 'resume'} size={14} />
-            {running ? 'Pause' : 'Resume'}
-          </Button>
+            <Icon name={running ? 'pause' : 'resume'} size={16} />
+          </IconButton>
         )
       }
     >
