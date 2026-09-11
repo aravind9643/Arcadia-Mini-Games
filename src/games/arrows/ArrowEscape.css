@@ -1,0 +1,145 @@
+.ae__levels {
+  display: flex;
+  gap: 7px;
+}
+.ae__lvl {
+  padding: 8px 17px;
+  border-radius: var(--r-full);
+  background: var(--surface);
+  border: 1px solid var(--stroke);
+  color: var(--text-dim);
+  font-size: 0.82rem;
+  font-weight: 640;
+  transition: all 0.2s var(--ease);
+}
+.ae__lvl.is-on {
+  color: #fff;
+  background: linear-gradient(105deg, #f97316, #8b5cf6);
+  border-color: transparent;
+  box-shadow: 0 8px 20px -10px rgba(249, 115, 22, 0.85);
+}
+
+/* ---------- board ---------- */
+.ae__board {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(var(--n), 1fr);
+  grid-template-rows: repeat(var(--n), 1fr);
+  gap: 0;
+  width: 100%;
+  max-width: 400px;
+  aspect-ratio: 1;
+  padding: 0;
+  border-radius: var(--r-lg);
+  /* clipped so escaping arrows visibly leave the board */
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--stroke);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+/* Dotted grid backdrop. The board clips overflow, so the rules that fall on
+   the outer edges are hidden without needing per-column selectors. */
+.ae__cell {
+  border: 1px dashed var(--stroke);
+  border-width: 0 1px 1px 0;
+}
+
+/* ---------- arrows ---------- */
+.ae__arrow {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  background: none;
+  z-index: 2;
+}
+.ae__head {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 92%;
+  height: 92%;
+  border-radius: 24%;
+  background: currentColor;
+  box-shadow:
+    inset 0 -3px 0 rgba(0, 0, 0, 0.26),
+    inset 0 3px 0 rgba(255, 255, 255, 0.3),
+    0 3px 9px -3px rgba(0, 0, 0, 0.6);
+  z-index: 1;
+  transition: filter 0.18s var(--ease);
+}
+.ae__head svg {
+  width: 66%;
+  height: 66%;
+  /* the glyph sits on the coloured body, so punch it out in white */
+  color: rgba(255, 255, 255, 0.92);
+}
+
+/* Body segments trailing the head. Each is slightly larger than its cell so
+   neighbouring segments (and the head) overlap, making a multi-cell arrow
+   read as one connected piece rather than a row of separate tiles. */
+.ae__body {
+  position: absolute;
+  width: 98%;
+  height: 98%;
+  margin: 1%;
+  border-radius: 24%;
+  background: currentColor;
+  filter: brightness(0.78);
+  box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* an arrow with a clear path gets a subtle lift */
+.ae__arrow.is-free .ae__head {
+  filter: brightness(1.12);
+}
+.ae__arrow:not(.is-free) .ae__head {
+  filter: saturate(0.75) brightness(0.82);
+}
+
+.ae__arrow.is-hint .ae__head {
+  animation: ae-hint 0.6s var(--ease) infinite alternate;
+}
+@keyframes ae-hint {
+  to {
+    box-shadow:
+      inset 0 -3px 0 rgba(0, 0, 0, 0.26),
+      0 0 0 3px #fff,
+      0 0 26px -2px currentColor;
+  }
+}
+
+.ae__arrow.is-bumped {
+  animation: ae-bump 0.36s var(--ease);
+  z-index: 5;
+}
+@keyframes ae-bump {
+  20% {
+    transform: translateX(-5px) rotate(-4deg);
+  }
+  55% {
+    transform: translateX(5px) rotate(4deg);
+  }
+  80% {
+    transform: translateX(-2px);
+  }
+}
+
+.ae__trail {
+  position: absolute;
+  border-radius: 6px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.ae__tools {
+  display: flex;
+  gap: 8px;
+}
+
+.ae__hint {
+  font-size: 0.8rem;
+  color: var(--text-faint);
+  text-align: center;
+}

@@ -443,6 +443,22 @@ export const GAMES: GameMeta[] = [
     ],
     Component: lazy(() => import('./shades/OddShade')),
   },
+  {
+    id: 'arrows',
+    title: 'Arrow Escape',
+    tagline: 'Tap each arrow out — but only when its path is clear',
+    category: 'Puzzle',
+    icon: 'arrows',
+    colors: ['#f97316', '#8b5cf6'],
+    scoring: 'high',
+    scoreLabel: 'Levels cleared',
+    howTo: [
+      'Every arrow leaves the board in the direction it points.',
+      'Tap one whose path to the edge is completely clear and it slides out.',
+      'Tap a blocked arrow and it bumps — that costs one of your three lives.',
+    ],
+    Component: lazy(() => import('./arrows/ArrowEscape')),
+  },
 ]
 
 export const byId = (id: string) => GAMES.find((g) => g.id === id)

@@ -63,6 +63,7 @@ export type IconName =
   | 'traffic'
   | 'globe'
   | 'swatch'
+  | 'arrows'
 
 type Props = SVGProps<SVGSVGElement> & {
   name: IconName
@@ -428,6 +429,15 @@ const PATHS: Record<IconName, ReactElement> = {
       <circle cx="12" cy="12" r="8.6" />
       <path d="M3.4 12h17.2" />
       <path d="M12 3.4a13 13 0 0 1 0 17.2 13 13 0 0 1 0-17.2Z" />
+    </>
+  ),
+  /* Arrows pointing out in opposing directions. */
+  arrows: (
+    <>
+      <path d="M12 10.4V3.4M12 3.4 9.2 6.2M12 3.4l2.8 2.8" />
+      <path d="M12 13.6v7M12 20.6l2.8-2.8M12 20.6l-2.8-2.8" />
+      <path d="M10.4 12h-7M3.4 12l2.8-2.8M3.4 12l2.8 2.8" />
+      <path d="M13.6 12h7M20.6 12l-2.8 2.8M20.6 12l-2.8-2.8" />
     </>
   ),
   /* Overlapping colour swatches. */
