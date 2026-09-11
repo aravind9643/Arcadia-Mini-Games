@@ -1,0 +1,81 @@
+.sc {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  aspect-ratio: 100 / 150;
+  overflow: hidden;
+  border-radius: var(--r-lg);
+  border: 1px solid var(--stroke);
+  box-shadow: var(--shadow);
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.sc__canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.sc__veil {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 24px;
+  text-align: center;
+  background: rgba(8, 10, 22, 0.46);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  pointer-events: none;
+}
+.sc__veil strong {
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  color: #fff;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.55);
+}
+.sc__veil span {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.86);
+  max-width: 24ch;
+  line-height: 1.45;
+}
+
+/* ---------- steering pad ---------- */
+.sc__pad {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  width: 100%;
+  max-width: 360px;
+}
+.sc__pad button {
+  display: grid;
+  place-items: center;
+  height: 54px;
+  border-radius: 16px;
+  background: var(--surface-2);
+  border: 1px solid var(--stroke);
+  color: var(--text-dim);
+  transition: all 0.14s var(--ease);
+}
+.sc__pad button:first-child > svg {
+  rotate: 180deg;
+}
+.sc__pad button:active {
+  background: linear-gradient(150deg, rgba(34, 197, 94, 0.32), rgba(132, 204, 22, 0.24));
+  border-color: rgba(163, 230, 53, 0.5);
+  color: var(--lime);
+  transform: scale(0.96);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .sc__pad {
+    display: none;
+  }
+}

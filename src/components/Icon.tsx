@@ -51,6 +51,12 @@ export type IconName =
   | 'noughts'
   | 'undo'
   | 'rotate-cw'
+  | 'gallows'
+  | 'shuffle'
+  | 'jump'
+  | 'paddle'
+  | 'bulb'
+  | 'bubbles'
 
 type Props = SVGProps<SVGSVGElement> & {
   name: IconName
@@ -321,6 +327,57 @@ const PATHS: Record<IconName, ReactElement> = {
     <>
       <path d="M20 12a8 8 0 1 1-2.6-5.9" />
       <path d="M20 4v4.6h-4.6" />
+    </>
+  ),
+
+  /* Blank letter slots with a rising underscore — the guessing word. */
+  gallows: (
+    <>
+      <path d="M3.4 19.4h17.2" />
+      <path d="M5.6 15.6h3.6M10.2 15.6h3.6M14.8 15.6h3.6" />
+      <rect x="5.6" y="4.6" width="12.8" height="7.4" rx="1.8" />
+      <path d="M9.4 8.3h5.2" />
+    </>
+  ),
+  /* Two crossing arrows — letters being rearranged. */
+  shuffle: (
+    <>
+      <path d="M3.4 6.6h4l9.2 10.8h4" />
+      <path d="M3.4 17.4h4l3.4-4" />
+      <path d="M13.6 8.2 16.6 6.6M18.2 4.6l2.4 2-2.4 2" />
+      <path d="M18.2 15.4l2.4 2-2.4 2" />
+    </>
+  ),
+  /* A figure arcing up off a platform. */
+  jump: (
+    <>
+      <circle cx="12.6" cy="5.4" r="2.2" />
+      <path d="M4.4 16.4c2.6-5.4 5.6-8 9-8 2.4 0 4.4 1.3 6.2 3.8" />
+      <path d="M3.4 20.4h5.2M15.4 20.4h5.2" />
+    </>
+  ),
+  /* Two paddles and a ball between them. */
+  paddle: (
+    <>
+      <rect x="2.6" y="7.4" width="2.8" height="9.2" rx="1.4" fill="currentColor" />
+      <rect x="18.6" y="7.4" width="2.8" height="9.2" rx="1.4" fill="currentColor" />
+      <circle cx="12" cy="12" r="1.9" fill="currentColor" stroke="none" />
+      <path d="M12 3.6v2.2M12 18.2v2.2" />
+    </>
+  ),
+  /* A lit bulb. */
+  bulb: (
+    <>
+      <path d="M9 17.4a6 6 0 1 1 6 0v1.6a1.4 1.4 0 0 1-1.4 1.4h-3.2A1.4 1.4 0 0 1 9 19Z" />
+      <path d="M9.6 17.4h4.8" />
+    </>
+  ),
+  /* Clustered bubbles. */
+  bubbles: (
+    <>
+      <circle cx="8.6" cy="14.4" r="5.2" />
+      <circle cx="16.4" cy="8.6" r="3.6" />
+      <circle cx="6.6" cy="6.4" r="2.2" />
     </>
   ),
 }

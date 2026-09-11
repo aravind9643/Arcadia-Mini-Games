@@ -105,7 +105,7 @@ export default function Reaction() {
           <Stat label="Round" value={`${Math.min(times.length + (done ? 0 : 1), ROUNDS)}/${ROUNDS}`} accent />
           <Stat label="Last" value={last ? `${last}ms` : '—'} />
           <Stat label="Average" value={avg ? `${avg}ms` : '—'} />
-          <Stat label="Best avg" value={best ? `${best}ms` : '—'} />
+          <Stat label="Best" value={best ? `${best}ms` : '—'} />
         </StatRow>
       }
     >

@@ -1,0 +1,73 @@
+.pg__levels {
+  display: flex;
+  gap: 7px;
+}
+.pg__lvl {
+  padding: 8px 17px;
+  border-radius: var(--r-full);
+  background: var(--surface);
+  border: 1px solid var(--stroke);
+  color: var(--text-dim);
+  font-size: 0.82rem;
+  font-weight: 640;
+  transition: all 0.2s var(--ease);
+}
+.pg__lvl.is-on {
+  color: #06202a;
+  background: linear-gradient(105deg, #e2e8f0, #94a3b8);
+  border-color: transparent;
+  box-shadow: 0 8px 20px -10px rgba(226, 232, 240, 0.7);
+}
+
+.pg {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  aspect-ratio: 100 / 130;
+  overflow: hidden;
+  border-radius: var(--r-lg);
+  background: radial-gradient(110% 70% at 50% 50%, rgba(34, 211, 238, 0.09), transparent 68%),
+    var(--surface);
+  border: 1px solid var(--stroke);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: none;
+}
+.pg__canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.pg__veil {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 24px;
+  text-align: center;
+  background: rgba(8, 10, 22, 0.4);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  pointer-events: none;
+}
+:root[data-theme='light'] .pg__veil {
+  background: rgba(244, 244, 251, 0.7);
+}
+.pg__veil strong {
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+}
+.pg__veil span {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  max-width: 24ch;
+  line-height: 1.45;
+}

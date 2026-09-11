@@ -1,0 +1,84 @@
+.bp__levels {
+  display: flex;
+  gap: 7px;
+}
+.bp__lvl {
+  padding: 8px 17px;
+  border-radius: var(--r-full);
+  background: var(--surface);
+  border: 1px solid var(--stroke);
+  color: var(--text-dim);
+  font-size: 0.82rem;
+  font-weight: 640;
+  transition: all 0.2s var(--ease);
+}
+.bp__lvl.is-on {
+  color: #fff;
+  background: linear-gradient(105deg, #06b6d4, #d946ef);
+  border-color: transparent;
+  box-shadow: 0 8px 20px -10px rgba(6, 182, 212, 0.85);
+}
+
+.bp__grid {
+  position: relative;
+  display: grid;
+  gap: 2px;
+  width: 100%;
+  max-width: 360px;
+  aspect-ratio: 9 / 12;
+  padding: 6px;
+  border-radius: var(--r-md);
+  background: var(--surface);
+  border: 1px solid var(--stroke);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.bp__c {
+  display: grid;
+  place-items: center;
+  padding: 0;
+  aspect-ratio: 1;
+  background: none;
+  border-radius: 50%;
+  transition: transform 0.14s var(--ease);
+}
+.bp__c:disabled {
+  cursor: default;
+}
+.bp__c.is-hover {
+  transform: scale(1.16);
+  z-index: 1;
+}
+
+.bp__b {
+  width: 88%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  /* glossy highlight sells the "bubble" read */
+  background-image: radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.55), transparent 52%);
+  box-shadow: inset 0 -2px 4px rgba(0, 0, 0, 0.3);
+}
+.bp__c.is-hover .bp__b {
+  box-shadow: inset 0 -2px 4px rgba(0, 0, 0, 0.3), 0 0 14px rgba(255, 255, 255, 0.8);
+}
+
+.bp__float {
+  position: absolute;
+  translate: -50% 0;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #fff;
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.9);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.bp__hint {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-faint);
+  text-align: center;
+  min-height: 1.3em;
+  font-variant-numeric: tabular-nums;
+}
