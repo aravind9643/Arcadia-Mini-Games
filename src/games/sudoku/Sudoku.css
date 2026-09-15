@@ -30,67 +30,106 @@
 }
 
 /* ---------- board ---------- */
+/*
+ * Alignment notes: borders on the cells themselves would add to each track's
+ * size, so 9 tracks could never divide the board evenly (they overflowed by
+ * ~2px and the last row/column got clipped). Instead the grid draws its own
+ * rules with `gap` + a background colour showing through, and the 3x3 seams
+ * are painted as a separate overlay. Cells then carry no borders at all and
+ * every track is exactly 1fr.
+ */
 .sd__grid {
-  /* seam colour needs real contrast against the faint per-cell hairlines */
-  --sd-seam: rgba(196, 181, 253, 0.75);
+  --sd-seam: rgba(196, 181, 253, 0.8);
+  --sd-line: var(--stroke);
+  --sd-hair: 1px;
+  --sd-seamw: 2px;
+
+  position: relative;
   display: grid;
   grid-template-columns: repeat(9, 1fr);
+  grid-template-rows: repeat(9, 1fr);
+  gap: var(--sd-hair);
   width: 100%;
   max-width: 400px;
   aspect-ratio: 1;
+  padding: var(--sd-hair);
   border-radius: var(--r-md);
-  overflow: hidden;
-  background: var(--surface);
-  border: 2px solid var(--sd-seam);
+  /* the gaps show this colour, forming the thin grid lines */
+  background: var(--sd-line);
+  border: var(--sd-seamw) solid var(--sd-seam);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
 }
 :root[data-theme='light'] .sd__grid {
-  --sd-seam: rgba(76, 29, 149, 0.55);
+  --sd-seam: rgba(76, 29, 149, 0.6);
 }
+
+/* The 3x3 seams, painted over the grid as two sets of repeating lines so
+   they land exactly on the track boundaries at any board size. */
+.sd__grid::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  /* below the selected-cell ring, above the plain cells */
+  z-index: 1;
+  background:
+    linear-gradient(to right, var(--sd-seam) 0 100%) no-repeat,
+    linear-gradient(to right, var(--sd-seam) 0 100%) no-repeat,
+    linear-gradient(to bottom, var(--sd-seam) 0 100%) no-repeat,
+    linear-gradient(to bottom, var(--sd-seam) 0 100%) no-repeat;
+  background-size:
+    var(--sd-seamw) 100%,
+    var(--sd-seamw) 100%,
+    100% var(--sd-seamw),
+    100% var(--sd-seamw);
+  background-position:
+    calc(100% / 3 - var(--sd-seamw) / 2) 0,
+    calc(200% / 3 - var(--sd-seamw) / 2) 0,
+    0 calc(100% / 3 - var(--sd-seamw) / 2),
+    0 calc(200% / 3 - var(--sd-seamw) / 2);
+}
+
 .sd__c {
   position: relative;
   display: grid;
   place-items: center;
   padding: 0;
-  aspect-ratio: 1;
+  min-width: 0;
+  min-height: 0;
+  border: 0;
   font-family: var(--font-mono);
   font-size: clamp(0.85rem, 4vw, 1.22rem);
   font-weight: 600;
+  line-height: 1;
   color: var(--cyan);
-  background: transparent;
-  border: 1px solid var(--stroke);
+  background: var(--bg-2);
   transition: background 0.14s var(--ease);
 }
-/* Heavier rules on the 3x3 box seams. Box columns start at cells 4 and 7 of
-   each row; box rows start at the 28th and 55th cell. */
-.sd__c:nth-child(9n + 4),
-.sd__c:nth-child(9n + 7) {
-  border-left: 2px solid var(--sd-seam);
-}
-.sd__c:nth-child(n + 28):nth-child(-n + 36),
-.sd__c:nth-child(n + 55):nth-child(-n + 63) {
-  border-top: 2px solid var(--sd-seam);
-}
 
+/* State tints are layered over the opaque cell base, so the grid-line colour
+   behind the cells never bleeds through and shifts them. */
 .sd__c.is-given {
   color: var(--text);
   font-weight: 750;
-  background: var(--surface);
+  background: linear-gradient(var(--surface), var(--surface)) var(--bg-2);
 }
 .sd__c.is-peer {
-  background: rgba(139, 92, 246, 0.1);
+  background: linear-gradient(rgba(139, 92, 246, 0.14), rgba(139, 92, 246, 0.14)) var(--bg-2);
 }
 .sd__c.is-same {
-  background: rgba(34, 211, 238, 0.16);
+  background: linear-gradient(rgba(34, 211, 238, 0.2), rgba(34, 211, 238, 0.2)) var(--bg-2);
 }
 .sd__c.is-sel {
-  background: rgba(139, 92, 246, 0.32);
+  background: linear-gradient(rgba(139, 92, 246, 0.4), rgba(139, 92, 246, 0.4)) var(--bg-2);
   box-shadow: inset 0 0 0 2px var(--violet);
+  /* lift the selected cell above the 3x3 seam overlay */
+  z-index: 2;
 }
 .sd__c.is-bad {
   color: #fb7185;
-  background: rgba(244, 63, 94, 0.2);
+  background: linear-gradient(rgba(244, 63, 94, 0.26), rgba(244, 63, 94, 0.26)) var(--bg-2);
 }
 
 .sd__notes {

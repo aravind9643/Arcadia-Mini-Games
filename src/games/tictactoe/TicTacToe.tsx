@@ -157,10 +157,10 @@ export default function TicTacToe() {
       onRestart={reset}
       hud={
         <StatRow>
-          <Stat label="Wins" value={tally.w} accent />
-          <Stat label="Losses" value={tally.l} />
-          <Stat label="Draws" value={tally.d} />
-          <Stat label="Record" value={wins} />
+          <Stat label="Won" value={tally.w} accent />
+          <Stat label="Lost" value={tally.l} />
+          <Stat label="Drew" value={tally.d} />
+          <Stat label="Best" value={wins} />
         </StatRow>
       }
     >
@@ -225,16 +225,22 @@ export default function TicTacToe() {
   )
 }
 
+/*
+ * Both marks are drawn in a 40-unit box and sized so their *ink* — the path
+ * plus half the 5-unit stroke on each side — spans an identical 29 units,
+ * centred on 20,20. Matching the ink rather than the path keeps X and O at
+ * the same visual weight; sizing the paths alone left O noticeably larger.
+ */
 const XMark = () => (
   <svg viewBox="0 0 40 40" aria-hidden>
     <motion.path
-      d="M9 9 31 31"
+      d="M8 8 32 32"
       initial={{ pathLength: 0 }}
       animate={{ pathLength: 1 }}
       transition={{ duration: 0.18 }}
     />
     <motion.path
-      d="M31 9 9 31"
+      d="M32 8 8 32"
       initial={{ pathLength: 0 }}
       animate={{ pathLength: 1 }}
       transition={{ duration: 0.18, delay: 0.14 }}

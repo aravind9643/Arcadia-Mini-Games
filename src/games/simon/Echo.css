@@ -2,10 +2,15 @@
   position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  /* rows declared so the pads stay square rather than stretching to the
+     height the flex parent happens to offer */
+  grid-template-rows: 1fr 1fr;
   gap: clamp(9px, 3vw, 15px);
   width: 100%;
   max-width: 400px;
   aspect-ratio: 1;
+  max-height: 100%;
+  flex: 0 0 auto;
 }
 .echo__pads.is-locked {
   pointer-events: none;

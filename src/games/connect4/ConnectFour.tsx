@@ -108,10 +108,10 @@ export default function ConnectFour() {
       onRestart={reset}
       hud={
         <StatRow>
-          <Stat label="Wins" value={tally.w} accent />
-          <Stat label="Losses" value={tally.l} />
-          <Stat label="Draws" value={tally.d} />
-          <Stat label="Record" value={allTime} />
+          <Stat label="Won" value={tally.w} accent />
+          <Stat label="Lost" value={tally.l} />
+          <Stat label="Drew" value={tally.d} />
+          <Stat label="Best" value={allTime} />
         </StatRow>
       }
     >
