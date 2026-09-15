@@ -42,13 +42,20 @@
   flex-direction: column;
   min-width: 0;
 }
+/* Titles vary a lot in length (e.g. "Pong" vs "Arrows – Puzzle Escape"), so
+   the size flexes with the viewport and long ones wrap to a second line
+   instead of being cut off with an ellipsis. */
 .gf__titles h1 {
-  font-size: 1.06rem;
+  font-size: clamp(0.86rem, 3.6vw, 1.06rem);
   font-weight: 750;
   letter-spacing: -0.025em;
-  white-space: nowrap;
+  line-height: 1.15;
+  /* at most two lines, then ellipsis as a last resort */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
   overflow: hidden;
-  text-overflow: ellipsis;
+  overflow-wrap: anywhere;
 }
 .gf__titles span {
   font-size: 0.7rem;

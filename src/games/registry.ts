@@ -77,7 +77,7 @@ export const GAMES: GameMeta[] = [
   },
   {
     id: 'snake',
-    title: 'Neon Snake',
+    title: 'Snake',
     tagline: 'Grow long, never bite yourself',
     category: 'Arcade',
     icon: 'snake',
@@ -93,7 +93,7 @@ export const GAMES: GameMeta[] = [
   },
   {
     id: 'whack',
-    title: 'Tap Rush',
+    title: 'Whack-a-Mole',
     tagline: 'Thirty seconds, endless targets',
     category: 'Reflex',
     icon: 'crosshair',
@@ -109,7 +109,7 @@ export const GAMES: GameMeta[] = [
   },
   {
     id: 'simon',
-    title: 'Echo',
+    title: 'Simon',
     tagline: 'Repeat the pattern, one step longer each time',
     category: 'Memory',
     icon: 'waveform',
@@ -125,7 +125,7 @@ export const GAMES: GameMeta[] = [
   },
   {
     id: 'minesweeper',
-    title: 'Minefield',
+    title: 'Minesweeper',
     tagline: 'Read the numbers, flag the danger',
     category: 'Puzzle',
     icon: 'gem',
@@ -141,7 +141,7 @@ export const GAMES: GameMeta[] = [
   },
   {
     id: 'wordle',
-    title: 'Word Hunt',
+    title: 'Wordle',
     tagline: 'Six guesses to crack the five-letter word',
     category: 'Word',
     icon: 'letters',
@@ -157,7 +157,7 @@ export const GAMES: GameMeta[] = [
   },
   {
     id: 'tetris',
-    title: 'Block Drop',
+    title: 'Tetris',
     tagline: 'Stack the falling pieces, clear the lines',
     category: 'Arcade',
     icon: 'blocks',
@@ -173,7 +173,7 @@ export const GAMES: GameMeta[] = [
   },
   {
     id: 'flappy',
-    title: 'Sky Hop',
+    title: 'Flappy Bird',
     tagline: 'One tap keeps you airborne',
     category: 'Reflex',
     icon: 'wing',
@@ -221,7 +221,7 @@ export const GAMES: GameMeta[] = [
   },
   {
     id: 'breakout',
-    title: 'Brick Breaker',
+    title: 'Breakout',
     tagline: 'Bounce, smash, clear the wall',
     category: 'Arcade',
     icon: 'bricks',
@@ -269,7 +269,7 @@ export const GAMES: GameMeta[] = [
   },
   {
     id: 'anagram',
-    title: 'Anagram Rush',
+    title: 'Word Scramble',
     tagline: 'Unscramble as many words as you can',
     category: 'Word',
     icon: 'shuffle',
@@ -285,7 +285,7 @@ export const GAMES: GameMeta[] = [
   },
   {
     id: 'doodle',
-    title: 'Sky Climb',
+    title: 'Doodle Jump',
     tagline: 'Bounce ever upward, never look down',
     category: 'Arcade',
     icon: 'jump',
@@ -333,7 +333,7 @@ export const GAMES: GameMeta[] = [
   },
   {
     id: 'bubble',
-    title: 'Bubble Pop',
+    title: 'SameGame',
     tagline: 'Clear the board one cluster at a time',
     category: 'Puzzle',
     icon: 'bubbles',
@@ -349,8 +349,8 @@ export const GAMES: GameMeta[] = [
   },
   {
     id: 'grouping',
-    title: 'Common Thread',
-    tagline: 'Sixteen words, four hidden connections',
+    title: 'Connections',
+    tagline: 'Sixteen words, four hidden groups',
     category: 'Word',
     icon: 'groups',
     colors: ['#6366f1', '#a855f7'],
@@ -365,7 +365,7 @@ export const GAMES: GameMeta[] = [
   },
   {
     id: 'merge',
-    title: 'Fruit Drop',
+    title: 'Suika',
     tagline: 'Two of a kind merge into something bigger',
     category: 'Puzzle',
     icon: 'fruit',
@@ -397,7 +397,7 @@ export const GAMES: GameMeta[] = [
   },
   {
     id: 'crossy',
-    title: 'Road Hop',
+    title: 'Crossy Road',
     tagline: 'Cross the traffic, one hop at a time',
     category: 'Arcade',
     icon: 'traffic',
@@ -445,7 +445,7 @@ export const GAMES: GameMeta[] = [
   },
   {
     id: 'arrows',
-    title: 'Arrow Escape',
+    title: 'Arrows – Puzzle Escape',
     tagline: 'Tap each arrow out — but only when its path is clear',
     category: 'Puzzle',
     icon: 'arrows',

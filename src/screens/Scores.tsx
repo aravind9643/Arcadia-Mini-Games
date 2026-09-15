@@ -9,7 +9,7 @@ import { useStore } from '../lib/hooks'
 import { fmtAgo, fmtNum, fmtTime } from '../lib/utils'
 import './Scores.css'
 
-/** Memory and Word Hunt count moves/guesses; other "low" games measure time. */
+/** Memory Match and Wordle count moves/guesses; other "low" games measure time. */
 const COUNT_BASED = new Set(['memory', 'wordle'])
 
 function formatBest(id: string, scoring: string, best: number) {

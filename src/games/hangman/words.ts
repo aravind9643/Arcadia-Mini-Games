@@ -1,5 +1,5 @@
 /**
- * Word bank with categories, used by Hangman and Anagram Rush. Bundled so
+ * Word bank with categories, used by Hangman and Word Scramble. Bundled so
  * both games work offline. Lengths range 4–9 so puzzles stay approachable.
  */
 export type Entry = { word: string; hint: string }
