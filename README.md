@@ -1,6 +1,6 @@
 # Arcadia — Mini Games
 
-A mobile-first PWA arcade of twenty-six mini games, built with React 19, TypeScript, Vite and Framer Motion. Installable, and fully playable offline.
+A mobile-first PWA arcade of twenty-seven mini games, built with React 19, TypeScript, Vite and Framer Motion. Installable, and fully playable offline.
 
 ## Run it
 
@@ -43,6 +43,7 @@ The service worker only runs in a production build, so use `preview` to test ins
 | Triple Tile | Puzzle | top score |
 | Crossy Road | Arcade | furthest hop |
 | Odd Shade | Reflex | highest level |
+| Arrow Escape | Puzzle | highest level |
 
 ## On naming and trademarks
 

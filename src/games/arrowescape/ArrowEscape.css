@@ -1,0 +1,88 @@
+/* ==========================================================================
+   Arrow Escape Styles - Matching Mini-Games Design System
+   ========================================================================== */
+
+.ae {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+}
+
+/* ---------- Board Container (Matching Snake, 2048, BrickBreaker) ---------- */
+.ae__board {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  aspect-ratio: 1;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--stroke);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: var(--shadow);
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.ae__canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  cursor: pointer;
+}
+
+/* ---------- Combo Alignment inside Level Stat Card ---------- */
+.ae__level-val {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  vertical-align: middle;
+  line-height: 1;
+}
+
+.ae__combo-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 1px 5px 1px 3px;
+  border-radius: var(--r-full);
+  background: linear-gradient(135deg, #a3e635, #22d3ee);
+  color: #061016;
+  font-family: var(--font-sans);
+  font-size: 0.62rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  box-shadow: 0 1px 4px rgba(163, 230, 53, 0.4);
+  animation: ae-pop 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.ae__combo-badge svg {
+  display: block;
+  flex-shrink: 0;
+}
+
+@keyframes ae-pop {
+  0% {
+    transform: scale(0.75);
+    opacity: 0.6;
+  }
+  60% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

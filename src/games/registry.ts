@@ -443,6 +443,22 @@ export const GAMES: GameMeta[] = [
     ],
     Component: lazy(() => import('./shades/OddShade')),
   },
+  {
+    id: 'arrowescape',
+    title: 'Arrow Escape',
+    tagline: 'Clear the path and let every arrow break free',
+    category: 'Puzzle',
+    icon: 'arrow-escape',
+    colors: ['#06b6d4', '#6366f1'],
+    scoring: 'high',
+    scoreLabel: 'Highest level',
+    howTo: [
+      'Tap any arrow pointing toward an open exit to release it.',
+      'Blocked arrows will bump into obstacles and cost a life.',
+      'Clear all arrows from the board to complete the level!',
+    ],
+    Component: lazy(() => import('./arrowescape/ArrowEscape')),
+  },
 ]
 
 export const byId = (id: string) => GAMES.find((g) => g.id === id)

@@ -63,6 +63,7 @@ export type IconName =
   | 'traffic'
   | 'globe'
   | 'swatch'
+  | 'arrow-escape'
 
 type Props = SVGProps<SVGSVGElement> & {
   name: IconName
@@ -436,6 +437,14 @@ const PATHS: Record<IconName, ReactElement> = {
       <rect x="2.8" y="2.8" width="10" height="10" rx="2.4" fill="currentColor" />
       <rect x="11.2" y="11.2" width="10" height="10" rx="2.4" />
       <path d="M11.2 6.6h4.4a2 2 0 0 1 2 2v2.6" />
+    </>
+  ),
+  /* An escaping directional arrow breaking out through an aperture. */
+  'arrow-escape': (
+    <>
+      <path d="M4 12h14" />
+      <path d="M12 6l6 6-6 6" />
+      <path d="M21 4v4M21 16v4" />
     </>
   ),
 }
