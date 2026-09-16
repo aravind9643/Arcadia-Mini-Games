@@ -1,6 +1,6 @@
 # Arcadia — Mini Games
 
-A mobile-first PWA arcade of twenty-seven mini games, built with React 19, TypeScript, Vite and Framer Motion. Installable, and fully playable offline.
+A mobile-first PWA arcade of twenty-six mini games, built with React 19, TypeScript, Vite and Framer Motion. Installable, and fully playable offline.
 
 ## Run it
 
@@ -43,15 +43,12 @@ The service worker only runs in a production build, so use `preview` to test ins
 | Triple Tile | Puzzle | top score |
 | Crossy Road | Arcade | furthest hop |
 | Odd Shade | Reflex | highest level |
-| Arrows – Puzzle Escape | Puzzle | levels cleared |
-
-**Arrows – Puzzle Escape** is a dependency-ordering puzzle: each arrow leaves the board along the straight line it points down, and only moves if that line is completely clear. Because removal only ever frees space, the state space is monotone — so levels are generated *backwards* (each arrow is placed only where its exit lane is already clear), which guarantees solvability by construction, and a greedy solver needs no backtracking. That same solver powers the hint button. A generator test over 1,200 levels confirmed every one is solvable and well formed.
 
 ## On naming and trademarks
 
 Games here are listed under the familiar names of the titles they reproduce, so the mechanics are immediately recognisable. Every one is an independent implementation: all code, artwork, word lists and puzzle data are original, and no assets are taken from the original titles.
 
-Be aware that several of these names are **active trademarks** of their owners — among them Tetris (Tetris Holding), Wordle and Connections (The New York Times), Suika Game (Aladdin X), Crossy Road (Hipster Whale), Doodle Jump (Lima Sky), Flappy Bird (dotGEARS), Simon (Hasbro), Connect Four (Hasbro) and Arrows – Puzzle Escape (Lessmore). Using them is fine for a personal or portfolio project, but **publishing to an app store or any commercial distribution under these names risks takedown**. Rename the `title` fields in [`src/games/registry.ts`](src/games/registry.ts) before shipping publicly — titles live in that one file, so renaming is a single-file change and nothing else references them.
+Be aware that several of these names are **active trademarks** of their owners — among them Tetris (Tetris Holding), Wordle and Connections (The New York Times), Suika Game (Aladdin X), Crossy Road (Hipster Whale), Doodle Jump (Lima Sky), Flappy Bird (dotGEARS), Simon (Hasbro) and Connect Four (Hasbro). Using them is fine for a personal or portfolio project, but **publishing to an app store or any commercial distribution under these names risks takedown**. Rename the `title` fields in [`src/games/registry.ts`](src/games/registry.ts) before shipping publicly — titles live in that one file, so renaming is a single-file change and nothing else references them.
 
 The two Strategy games ship real opponents rather than random movers. Tic-Tac-Toe uses full **minimax** with depth preference, so Hard is unbeatable — a draw is the best available result. Connect Four uses **minimax with alpha-beta pruning** (depth 5 on Hard) over a positional evaluation that weights centre control and blocks imminent threats. Both were verified by scripted play: random moves won 0 of 6 against Tic-Tac-Toe's Hard AI and 0 of 4 against Connect Four's.
 
