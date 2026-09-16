@@ -459,6 +459,25 @@ export const GAMES: GameMeta[] = [
     ],
     Component: lazy(() => import('./arrowescape/ArrowEscape')),
   },
+  {
+    id: 'chainreaction',
+    title: 'Chain Reaction',
+    tagline: 'Stack, trigger, and conquer the grid',
+    category: 'Strategy',
+    icon: 'atom',
+    colors: ['#ff2a4b', '#00b0ff'],
+    scoring: 'high',
+    scoreLabel: 'Wins',
+    howTo: [
+      'Take turns placing orbs into empty cells or your own cells.',
+      'Corners hold 1 orb and explode/split on the 2nd orb (2 neighbors).',
+      'Edges hold 2 orbs and explode/split on the 3rd orb (3 neighbors).',
+      'Center cells hold 3 orbs and explode/split on the 4th orb (4 neighbors).',
+      'Exploding orbs capture adjacent cells and can trigger cascading chain reactions!',
+      'Eliminate all opponent orbs from the grid to win.',
+    ],
+    Component: lazy(() => import('./chainreaction/ChainReaction')),
+  },
 ]
 
 export const byId = (id: string) => GAMES.find((g) => g.id === id)

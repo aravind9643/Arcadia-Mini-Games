@@ -64,6 +64,7 @@ export type IconName =
   | 'globe'
   | 'swatch'
   | 'arrow-escape'
+  | 'atom'
 
 type Props = SVGProps<SVGSVGElement> & {
   name: IconName
@@ -445,6 +446,15 @@ const PATHS: Record<IconName, ReactElement> = {
       <path d="M4 12h14" />
       <path d="M12 6l6 6-6 6" />
       <path d="M21 4v4M21 16v4" />
+    </>
+  ),
+  /* An atomic nucleus with intersecting electron orbits for Chain Reaction. */
+  atom: (
+    <>
+      <circle cx="12" cy="12" r="2.4" fill="currentColor" />
+      <ellipse cx="12" cy="12" rx="9" ry="3.6" transform="rotate(30 12 12)" />
+      <ellipse cx="12" cy="12" rx="9" ry="3.6" transform="rotate(-30 12 12)" />
+      <ellipse cx="12" cy="12" rx="9" ry="3.6" transform="rotate(90 12 12)" />
     </>
   ),
 }
