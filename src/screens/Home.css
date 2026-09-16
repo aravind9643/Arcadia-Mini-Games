@@ -195,6 +195,55 @@
   box-shadow: 0 8px 22px -10px rgba(139, 92, 246, 0.8);
 }
 
+.home__sort-bar {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.home__sort-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px 4px 8px;
+  background: var(--surface);
+  border: 1px solid var(--stroke);
+  border-radius: var(--r-full);
+  font-size: 0.77rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: border-color 0.2s var(--ease), color 0.2s var(--ease);
+}
+
+.home__sort-label:hover,
+.home__sort-label:focus-within {
+  color: var(--text);
+  border-color: rgba(139, 92, 246, 0.55);
+}
+
+.home__sort-label svg {
+  color: var(--violet);
+  flex-shrink: 0;
+}
+
+.home__sort-select {
+  background: none;
+  border: none;
+  outline: none;
+  color: inherit;
+  font-size: inherit;
+  font-weight: 650;
+  font-family: inherit;
+  cursor: pointer;
+  padding: 0;
+}
+
+.home__sort-select option {
+  background: #141520;
+  color: #fff;
+}
+
 .home__count {
   font-size: 0.8rem;
   font-weight: 700;

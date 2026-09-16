@@ -65,6 +65,7 @@ export type IconName =
   | 'swatch'
   | 'arrow-escape'
   | 'atom'
+  | 'clock'
 
 type Props = SVGProps<SVGSVGElement> & {
   name: IconName
@@ -455,6 +456,12 @@ const PATHS: Record<IconName, ReactElement> = {
       <ellipse cx="12" cy="12" rx="9" ry="3.6" transform="rotate(30 12 12)" />
       <ellipse cx="12" cy="12" rx="9" ry="3.6" transform="rotate(-30 12 12)" />
       <ellipse cx="12" cy="12" rx="9" ry="3.6" transform="rotate(90 12 12)" />
+    </>
+  ),
+  clock: (
+    <>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 7v5l3.2 2" />
     </>
   ),
 }

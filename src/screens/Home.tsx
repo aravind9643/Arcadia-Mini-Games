@@ -12,18 +12,28 @@ import { cx, fmtNum, fmtTime } from '../lib/utils'
 import { InstallPrompt } from './InstallPrompt'
 import './Home.css'
 
-type Filter = 'All' | 'Favorites' | GameCategory
+type Filter = 'All' | 'Recent' | 'Favorites' | GameCategory
+type SortOption = 'popular' | 'recent' | 'default' | 'name'
 
 export function Home() {
   const { scores, favorites } = useStore()
   const [filter, setFilter] = useState<Filter>('All')
+  const [sort, setSort] = useState<SortOption>('default')
   const [query, setQuery] = useState('')
 
   const visible = useMemo(() => {
     const q = query.trim().toLowerCase()
-    return GAMES.filter((g) => {
+    const filtered = GAMES.filter((g) => {
+      const s = scores[g.id]
+      if (filter === 'Recent' && (!s || s.plays === 0)) return false
       if (filter === 'Favorites' && !favorites.includes(g.id)) return false
-      if (filter !== 'All' && filter !== 'Favorites' && g.category !== filter) return false
+      if (
+        filter !== 'All' &&
+        filter !== 'Recent' &&
+        filter !== 'Favorites' &&
+        g.category !== filter
+      )
+        return false
       if (!q) return true
       return (
         g.title.toLowerCase().includes(q) ||
@@ -31,22 +41,59 @@ export function Home() {
         g.category.toLowerCase().includes(q)
       )
     })
-  }, [filter, query, favorites])
+
+    // In 'Recent' tab, default sort is by popularity (most played)
+    const effectiveSort = filter === 'Recent' && sort === 'default' ? 'popular' : sort
+
+    return [...filtered].sort((a, b) => {
+      const sa = scores[a.id]
+      const sb = scores[b.id]
+
+      if (effectiveSort === 'popular') {
+        const pa = sa?.plays ?? 0
+        const pb = sb?.plays ?? 0
+        if (pb !== pa) return pb - pa
+        const la = sa?.lastPlayed ?? 0
+        const lb = sb?.lastPlayed ?? 0
+        return lb - la
+      }
+
+      if (effectiveSort === 'recent') {
+        const la = sa?.lastPlayed ?? 0
+        const lb = sb?.lastPlayed ?? 0
+        if (lb !== la) return lb - la
+        const pa = sa?.plays ?? 0
+        const pb = sb?.plays ?? 0
+        return pb - pa
+      }
+
+      if (effectiveSort === 'name') {
+        return a.title.localeCompare(b.title)
+      }
+
+      return 0
+    })
+  }, [favorites, filter, query, scores, sort])
 
   const totalPlays = Object.values(scores).reduce((a, s) => a + s.plays, 0)
   const played = Object.keys(scores).length
 
+  // Continue card features the user's most popular game among recent games
   const recent = useMemo(
     () =>
       Object.entries(scores)
-        .sort((a, b) => b[1].lastPlayed - a[1].lastPlayed)
+        .filter(([, s]) => s.plays > 0)
+        .sort((a, b) => {
+          if (b[1].plays !== a[1].plays) return b[1].plays - a[1].plays
+          return b[1].lastPlayed - a[1].lastPlayed
+        })
         .slice(0, 1)
         .map(([id]) => GAMES.find((g) => g.id === id))
         .filter((g): g is GameMeta => Boolean(g))[0],
     [scores],
   )
 
-  const filters: Filter[] = ['All', 'Favorites', ...CATEGORIES]
+  const filters: Filter[] = ['All', 'Recent', 'Favorites', ...CATEGORIES]
 
   return (
     <div className="page shell home">
@@ -110,7 +157,12 @@ export function Home() {
                 setFilter(f)
               }}
             >
-              {f === 'Favorites' ? (
+              {f === 'Recent' ? (
+                <>
+                  <Icon name="clock" size={13} />
+                  Recent
+                </>
+              ) : f === 'Favorites' ? (
                 <>
                   <Icon name="star-filled" size={13} />
                   Favorites
@@ -123,15 +175,41 @@ export function Home() {
         </div>
       </div>
 
-      <SectionTitle action={<span className="home__count">{visible.length}</span>}>
-        {filter === 'All' ? 'All games' : filter}
+      <SectionTitle
+        action={
+          <div className="home__sort-bar">
+            <label className="home__sort-label" htmlFor="home-sort">
+              <Icon name="sparkles" size={13} />
+              <select
+                id="home-sort"
+                value={filter === 'Recent' && sort === 'default' ? 'popular' : sort}
+                onChange={(e) => {
+                  cue('tap')
+                  setSort(e.target.value as SortOption)
+                }}
+                className="home__sort-select"
+                aria-label="Sort games"
+              >
+                <option value="popular">Popular</option>
+                <option value="recent">Recent</option>
+                <option value="default">Featured</option>
+                <option value="name">A–Z</option>
+              </select>
+            </label>
+            <span className="home__count">{visible.length}</span>
+          </div>
+        }
+      >
+        {filter === 'All' ? 'All games' : filter === 'Recent' ? 'Recent games' : filter}
       </SectionTitle>
 
       {visible.length === 0 ? (
         <motion.p className="home__none" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           {filter === 'Favorites'
             ? 'No favorites yet — tap the star on any game.'
-            : 'Nothing matched that search.'}
+            : filter === 'Recent'
+              ? 'No recent games yet — play a round to start your history!'
+              : 'Nothing matched that search.'}
         </motion.p>
       ) : (
         <motion.ul className="grid" layout>
@@ -158,6 +236,10 @@ function greeting() {
 
 function ContinueCard({ game }: { game: GameMeta }) {
   const nav = useNavigate()
+  const { scores } = useStore()
+  const s = scores[game.id]
+  const playLabel = s?.plays ? `${fmtNum(s.plays)} ${s.plays === 1 ? 'round' : 'rounds'} played` : null
+
   return (
     <motion.button
       className="cont"
@@ -176,7 +258,9 @@ function ContinueCard({ game }: { game: GameMeta }) {
         <Icon name={game.icon} size={23} />
       </span>
       <span className="cont__text">
-        <span className="cont__label">Jump back in</span>
+        <span className="cont__label">
+          {playLabel ? `Most Played · ${playLabel}` : 'Jump back in'}
+        </span>
         <strong>{game.title}</strong>
       </span>
       <span className="cont__go">
