@@ -66,6 +66,8 @@ export type IconName =
   | 'arrow-escape'
   | 'atom'
   | 'clock'
+  | 'blast'
+  | 'flask'
 
 type Props = SVGProps<SVGSVGElement> & {
   name: IconName
@@ -462,6 +464,20 @@ const PATHS: Record<IconName, ReactElement> = {
     <>
       <circle cx="12" cy="12" r="9" />
       <path d="M12 7v5l3.2 2" />
+    </>
+  ),
+  blast: (
+    <>
+      <rect x="4" y="4" width="6.5" height="6.5" rx="1.5" />
+      <rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5" />
+      <rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5" />
+      <path d="M14 14l6 6M20 14l-6 6" />
+    </>
+  ),
+  flask: (
+    <>
+      <path d="M9.5 3h5M10 3v5.5L5.6 18a2.3 2.3 0 0 0 2.1 3.5h8.6a2.3 2.3 0 0 0 2.1-3.5L14 8.5V3" />
+      <path d="M7.4 15h9.2" />
     </>
   ),
 }

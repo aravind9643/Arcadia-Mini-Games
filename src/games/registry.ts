@@ -478,6 +478,40 @@ export const GAMES: GameMeta[] = [
     ],
     Component: lazy(() => import('./chainreaction/ChainReaction')),
   },
+  {
+    id: 'blockblast',
+    title: 'Block Blast',
+    tagline: 'Fit the shapes, blast the lines, chain the combos',
+    category: 'Puzzle',
+    icon: 'blast',
+    colors: ['#f43f5e', '#f59e0b'],
+    scoring: 'high',
+    scoreLabel: 'Top score',
+    howTo: [
+      'Drag shapes from the tray onto the 8×8 grid (or tap to place).',
+      'Fill entire rows or columns to trigger explosive blasts.',
+      'Clear lines in consecutive moves to build huge combo multipliers!',
+      'Plan your board space — the game ends when no pieces fit.',
+    ],
+    Component: lazy(() => import('./blockblast/BlockBlast')),
+  },
+  {
+    id: 'watersort',
+    title: 'Water Sort',
+    tagline: 'Pour and sort the liquids until each tube is pure',
+    category: 'Puzzle',
+    icon: 'flask',
+    colors: ['#00d2ff', '#a855f7'],
+    scoring: 'high',
+    scoreLabel: 'Highest level',
+    howTo: [
+      'Tap a tube to select it, then tap another tube to pour.',
+      'You can only pour water onto matching colors or into empty tubes.',
+      'Plan your moves to avoid getting stuck — or use Undo.',
+      'Sort every color into its own tube to clear the level!',
+    ],
+    Component: lazy(() => import('./watersort/WaterSort')),
+  },
 ]
 
 export const byId = (id: string) => GAMES.find((g) => g.id === id)

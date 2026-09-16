@@ -1,0 +1,390 @@
+/* ==========================================================================
+   Water Sort Puzzle — Clean Glassmorphism & Flawless Fluid Physics
+   ========================================================================== */
+
+.ws {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 460px;
+  margin: 0 auto;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+}
+
+/* ---------- Pedestal Stand Tray ---------- */
+.ws__stand {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 380px;
+  padding: 30px 14px 26px;
+  border-radius: var(--r-xl, 24px);
+  background: radial-gradient(circle at 50% 25%, #16192b 0%, #090b14 85%);
+  border: 1.5px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 
+    inset 0 1px 1px rgba(255, 255, 255, 0.12),
+    0 20px 48px -12px rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* Multi-Row Tube Rack */
+.ws__rack {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  width: 100%;
+}
+
+.ws__row {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: clamp(14px, 4vw, 24px);
+  width: 100%;
+}
+
+/* ---------- Static Test Tube Wrapper ---------- */
+.ws__tube-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  touch-action: none;
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.ws__tube-wrapper:hover {
+  transform: translateY(-4px);
+}
+
+/* Elevated Selected Tube */
+.ws__tube-wrapper--selected {
+  transform: translateY(-24px);
+  filter: drop-shadow(0 14px 20px rgba(99, 102, 241, 0.4));
+}
+
+.ws__tube-wrapper--selected .ws__tube-rim {
+  border-color: rgba(165, 180, 252, 0.9);
+  box-shadow: 0 0 12px rgba(129, 140, 248, 0.8);
+}
+
+/* Invalid Move Shake */
+.ws__tube-wrapper--shake {
+  animation: ws-shake 0.35s ease-in-out;
+}
+
+@keyframes ws-shake {
+  0%, 100% { transform: translateY(-24px) translateX(0); }
+  20% { transform: translateY(-24px) translateX(-6px); }
+  40% { transform: translateY(-24px) translateX(6px); }
+  60% { transform: translateY(-24px) translateX(-4px); }
+  80% { transform: translateY(-24px) translateX(4px); }
+}
+
+/* Solved Tube State */
+.ws__tube-wrapper--solved {
+  filter: drop-shadow(0 0 16px rgba(250, 204, 21, 0.55));
+}
+
+.ws__tube-wrapper--solved .ws__tube-rim {
+  border-color: rgba(253, 224, 71, 0.85);
+}
+
+/* Base Shadow on Stand Floor */
+.ws__tube-shadow {
+  width: 32px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.6);
+  filter: blur(3px);
+  margin-top: 4px;
+  transition: transform 0.22s ease, opacity 0.22s ease;
+}
+
+.ws__tube-wrapper--selected .ws__tube-shadow {
+  transform: scale(0.7);
+  opacity: 0.3;
+}
+
+/* ---------- Glass Test Tube Components ---------- */
+.ws__tube-rim {
+  position: relative;
+  width: calc(100% + 10px);
+  height: 8px;
+  border-radius: 4px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.16) 100%);
+  border: 1.5px solid rgba(255, 255, 255, 0.38);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+  margin-bottom: -1px;
+  z-index: 10;
+}
+
+.ws__rim-shine {
+  position: absolute;
+  top: 1px;
+  left: 6px;
+  width: 12px;
+  height: 2px;
+  border-radius: 1px;
+  background: #ffffff;
+  opacity: 0.85;
+}
+
+.ws__tube {
+  position: relative;
+  width: clamp(44px, 12vw, 50px);
+  height: clamp(155px, 34vh, 175px);
+  border-radius: 0 0 25px 25px;
+  border: 2px solid rgba(255, 255, 255, 0.26);
+  border-top: none;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.14) 0%,
+    rgba(255, 255, 255, 0.03) 25%,
+    rgba(0, 0, 0, 0.12) 70%,
+    rgba(255, 255, 255, 0.16) 100%
+  );
+  box-shadow: 
+    inset 3px 0 5px rgba(255, 255, 255, 0.35),
+    inset -3px 0 5px rgba(0, 0, 0, 0.45),
+    0 10px 24px -4px rgba(0, 0, 0, 0.7);
+  overflow: hidden;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+/* Gloss Specular Highlight Stripe */
+.ws__tube-shine {
+  position: absolute;
+  top: 0;
+  left: 3px;
+  width: 6px;
+  height: calc(100% - 12px);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.4) 0%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  border-radius: 3px;
+  pointer-events: none;
+  z-index: 12;
+}
+
+/* Volume Graduation Ticks */
+.ws__tube-grad {
+  position: absolute;
+  top: 0;
+  right: 3px;
+  width: 8px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  pointer-events: none;
+  z-index: 12;
+}
+
+.ws__grad-line {
+  width: 5px;
+  height: 1.5px;
+  background: rgba(255, 255, 255, 0.32);
+  border-radius: 1px;
+  margin-left: auto;
+}
+
+/* ---------- Liquid Column ---------- */
+.ws__liquid-column {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column-reverse;
+  overflow: hidden;
+  border-radius: 0 0 23px 23px;
+}
+
+.ws__liquid-layer {
+  position: relative;
+  width: 100%;
+  height: 25%;
+  flex-shrink: 0;
+  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.32), inset 0 -4px 6px rgba(0, 0, 0, 0.45);
+}
+
+.ws__liquid-layer:first-child {
+  border-radius: 0 0 23px 23px;
+}
+
+/* Meniscus Cap on Top of Liquid */
+.ws__meniscus {
+  position: absolute;
+  top: -2px;
+  left: 0;
+  right: 0;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.55);
+  box-shadow: 0 1px 4px rgba(255, 255, 255, 0.7);
+  z-index: 5;
+}
+
+/* Dynamic Draining Animation in Flying Overlay Tube */
+.ws__liquid-layer--draining {
+  animation: ws-drain 0.44s ease-in forwards;
+}
+
+@keyframes ws-drain {
+  0% {
+    height: 25%;
+    opacity: 1;
+  }
+  100% {
+    height: 0%;
+    opacity: 0;
+  }
+}
+
+/* Dynamic Filling Animation in Receiving Target Tube */
+.ws__liquid-layer--filling {
+  animation: ws-fill 0.42s cubic-bezier(0.2, 0.8, 0.4, 1) forwards;
+}
+
+@keyframes ws-fill {
+  0% {
+    height: 0%;
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* ---------- Solved Badge ---------- */
+.ws__solved-badge {
+  position: absolute;
+  top: -14px;
+  right: -8px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #fde047 0%, #f59e0b 100%);
+  display: grid;
+  place-items: center;
+  color: #451a03;
+  box-shadow: 0 3px 10px rgba(245, 158, 11, 0.7);
+  animation: ws-badge-pop 0.35s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+  z-index: 15;
+}
+
+@keyframes ws-badge-pop {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ---------- Absolute Flying Overlay Tube & Stream ---------- */
+.ws__overlay-tube {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+  z-index: 500;
+  transform-origin: 50% 10px;
+  filter: drop-shadow(0 16px 28px rgba(0, 0, 0, 0.65));
+}
+
+.ws__overlay-stream {
+  position: absolute;
+  width: 7px;
+  height: 52px;
+  border-radius: 3.5px;
+  transform: translateX(-50%);
+  pointer-events: none;
+  z-index: 450;
+  animation: ws-stream-glow 0.25s linear infinite;
+}
+
+@keyframes ws-stream-glow {
+  0%, 100% {
+    transform: translateX(-50%) scaleY(0.92);
+    filter: brightness(1);
+  }
+  50% {
+    transform: translateX(-50%) scaleY(1.05);
+    filter: brightness(1.25);
+  }
+}
+
+/* ---------- Action Controls ---------- */
+.ws__actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  width: 100%;
+  max-width: 440px;
+}
+
+.ws__action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: var(--r-full, 9999px);
+  background: var(--surface, #1e2235);
+  border: 1px solid var(--stroke, rgba(255, 255, 255, 0.12));
+  color: var(--text-dim, #94a3b8);
+  font-size: 0.88rem;
+  font-weight: 650;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s cubic-bezier(0.2, 0.8, 0.4, 1);
+}
+
+.ws__action-btn:hover:not(:disabled) {
+  color: var(--text, #f8fafc);
+  border-color: rgba(139, 92, 246, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45);
+}
+
+.ws__action-btn:active:not(:disabled) {
+  transform: scale(0.96);
+}
+
+.ws__action-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.ws__action-btn--accent {
+  color: #ffffff;
+  background: linear-gradient(135deg, #7c3aed 0%, #c026d3 100%);
+  border-color: transparent;
+  box-shadow: 0 6px 20px -4px rgba(124, 58, 237, 0.7);
+}
+
+.ws__action-btn--accent:hover:not(:disabled) {
+  box-shadow: 0 8px 26px -4px rgba(124, 58, 237, 0.9);
+}

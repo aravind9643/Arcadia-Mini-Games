@@ -1,0 +1,228 @@
+/* ==========================================================================
+   Block Blast — Modern Jewel Neon Styles & Pixel-Perfect Alignment
+   ========================================================================== */
+
+.bb {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+}
+
+/* ---------- 8x8 Grid Board ---------- */
+.bb__board {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  max-height: min(56vh, 420px);
+  aspect-ratio: 1 / 1;
+  border-radius: var(--r-lg);
+  padding: clamp(6px, 1.8vw, 10px);
+  background: #0b0c16;
+  border: 1.5px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 14px 34px -10px rgba(0, 0, 0, 0.7), var(--shadow);
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  gap: clamp(3px, 1vw, 5px);
+  overflow: hidden;
+}
+
+/* Individual Grid Cell */
+.bb__cell {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: clamp(4px, 1.2vw, 7px);
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  transition: transform 0.15s var(--ease), background-color 0.15s ease;
+  overflow: hidden;
+}
+
+/* Filled Beveled Jewel Block */
+.bb__cell--filled {
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: inset 0 2.5px 3px rgba(255, 255, 255, 0.45), inset 0 -2.5px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* Ghost Placement Preview */
+.bb__cell--preview {
+  opacity: 0.65;
+  transform: scale(0.96);
+  border: 1.5px dashed rgba(255, 255, 255, 0.75);
+  box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+/* Clearing Line Blast Animation */
+.bb__cell--clearing {
+  animation: bb-blast 0.36s cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
+  z-index: 5;
+}
+
+@keyframes bb-blast {
+  0% {
+    transform: scale(1);
+    filter: brightness(2) drop-shadow(0 0 16px currentColor);
+    opacity: 1;
+  }
+  45% {
+    transform: scale(1.15) rotate(3deg);
+    filter: brightness(2.8) drop-shadow(0 0 28px #ffffff);
+    opacity: 0.95;
+  }
+  100% {
+    transform: scale(0.1) rotate(-6deg);
+    opacity: 0;
+  }
+}
+
+/* ---------- Combo Badge Overlay ---------- */
+.bb__combo-badge {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 25;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  animation: bb-combo-pop 0.82s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
+}
+
+.bb__combo-pill {
+  font-size: 1.35rem;
+  font-weight: 850;
+  letter-spacing: -0.02em;
+  padding: 8px 22px;
+  border-radius: var(--r-full);
+  color: #ffffff;
+  background: linear-gradient(135deg, #f43f5e, #f59e0b);
+  box-shadow: 0 10px 30px rgba(244, 63, 94, 0.6), 0 0 20px rgba(251, 191, 36, 0.65);
+  text-transform: uppercase;
+}
+
+.bb__combo-score {
+  font-size: 0.95rem;
+  font-weight: 750;
+  color: #fde047;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
+}
+
+@keyframes bb-combo-pop {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -25%) scale(0.6);
+  }
+  20% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.14);
+  }
+  40% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  75% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -75%) scale(0.85);
+  }
+}
+
+/* ---------- Piece Tray ---------- */
+.bb__tray {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  width: 100%;
+  max-width: 420px;
+  min-height: 105px;
+  padding: 8px 10px;
+  border-radius: var(--r-lg);
+  background: var(--surface);
+  border: 1px solid var(--stroke);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: var(--shadow);
+}
+
+.bb__slot {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 92px;
+  border-radius: var(--r-md);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  cursor: grab;
+  touch-action: none;
+  transition: transform 0.15s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.bb__slot:active {
+  cursor: grabbing;
+}
+
+.bb__slot--empty {
+  cursor: default;
+  opacity: 0;
+}
+
+.bb__slot--disabled {
+  opacity: 0.28;
+  filter: grayscale(0.5);
+  cursor: not-allowed;
+}
+
+.bb__slot--selected {
+  background: rgba(139, 92, 246, 0.12);
+  border: 1.5px dashed rgba(139, 92, 246, 0.7);
+  box-shadow: 0 0 16px rgba(139, 92, 246, 0.35);
+}
+
+/* Rendered Mini Piece Matrix */
+.bb__piece {
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+
+.bb__piece-tile {
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: inset 0 2px 2px rgba(255, 255, 255, 0.45), inset 0 -1px 2px rgba(0, 0, 0, 0.45);
+}
+
+.bb__piece-empty {
+  opacity: 0;
+}
+
+/* ---------- Dragging Floating Piece (Exact Match with Board Cells) ---------- */
+.bb__dragging {
+  position: fixed;
+  pointer-events: none;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.8));
+}
+
+.bb__dragging-tile {
+  border-radius: clamp(4px, 1.2vw, 7px);
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  box-shadow: inset 0 3px 3px rgba(255, 255, 255, 0.5), 0 0 16px currentColor;
+}
